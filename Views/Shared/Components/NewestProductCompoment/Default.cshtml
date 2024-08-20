@@ -3,7 +3,7 @@
 @foreach (var item in Model)
 {
     <div class="latest-product__slider__item">
-        <a asp-action="Index" asp-controller="product_detail" asp-route-id="@item.Id" class="latest-product__item">
+        <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id" class="latest-product__item">
             <div class="latest-product__item__pic">
                 <img src="data:image/png;base64,@item.Image" alt="">
             </div>

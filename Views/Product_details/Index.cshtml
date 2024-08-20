@@ -1,0 +1,297 @@
+﻿@* @model Website.Models.SanPham *@
+
+@{
+    
+}
+@* var selectedCategory = ViewBag.SelectedCategory as DanhMuc;
+    var selectedProduct = ViewBag.SelectedProduct as SanPham;
+    ViewBag.Title = Model.TenSanPham; *@
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="@Url.Action("Index", "Shop")" method="get">
+                            <div class="hero__search__categories">
+                                Tìm kiếm
+                            </div>
+                            <input type="text" name="searchQuery" placeholder="Nhập từ khóa tìm kiếm">
+                            <button type="submit" class="site-btn"><i class='bx bx-search'></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__links">
+                    <div class="breadcrumb__option" style="margin-left: 100px">
+                        <a asp-action="Index" asp-controller="Home">Trang chủ</a> /
+                        <a asp-action="Index" asp-controller="Shop">Cửa hàng</a>
+                        @* @if (selectedCategory != null)
+                        {
+                            <a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@selectedCategory.Id">/ @selectedCategory.Namedanhmuc /</a>
+                        }
+                        @if (selectedProduct != null)
+                        {
+                            <span>@selectedProduct.TenSanPham</span>
+                        } *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__left product__thumb nice-scroll">
+                        @* <a class="pt active" href="#product-1">
+                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                        </a>
+                        <a class="pt" href="#product-2">
+                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                        </a>
+                        <a class="pt" href="#product-3">
+                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                        </a>
+                        <a class="pt" href="#product-4">
+                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                        </a> *@
+                    </div>
+                    <div class="product__details__slider__content">
+                        <div class="product__details__pic__slider owl-carousel">
+                            @* <img data-hash="product-1" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                            <img data-hash="product-2" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                            <img data-hash="product-3" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                            <img data-hash="product-4" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt=""> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product__details__text">
+                    <h3>
+                        @* @Model.TenSanPham *@
+                        <div class="rating">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <span>( Đánh giá : 6k )</span>
+                        </div>
+                    </h3>
+                    <div class="product__details__price">
+                        @* <a class="price-display">@Model.GiamGia</a><span class="price-display">@Model.GiaSanpham</spa> *@
+                    </div>
+                    <div class="product__details__button">
+                        <div class="quantity-heart">
+                            <div class="quantity">
+                                <span>Số lượng:</span>
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                            <a href="#" class="heart-icon"><span class='bx bxs-heart'></span></a>
+                        </div>
+                        <div class="buttons">
+                            <a href="#" class="cart-btn"><i class='bx bx-cart'></i>Cho vào giỏ hàng</a>
+                            <a href="#" class="buy-now-btn">Mua ngay</a>
+                        </div>
+                    </div>
+                    <div class="product__details__widget">
+                        <ul>
+                            <li>
+                                <span>Tình trạng:</span>
+                                <div class="stock__checkbox">
+                                    <label>
+                                        Còn hàng
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Chọn màu:</span>
+                                <div class="color__checkbox">
+                                    <label for="red">
+                                        <input type="radio" name="color__radio" id="red" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="black">
+                                        <input type="radio" name="color__radio" id="black">
+                                        <span class="checkmark black-bg"></span>
+                                    </label>
+                                    <label for="grey">
+                                        <input type="radio" name="color__radio" id="grey">
+                                        <span class="checkmark grey-bg"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <span style="padding-top: 11px;">Size:</span>
+                                <div class="size__btn">
+                                    <label for="xs-btn" class="active">
+                                        <input type="radio" id="xs-btn">
+                                        xs
+                                    </label>
+                                    <label for="s-btn">
+                                        <input type="radio" id="s-btn">
+                                        s
+                                    </label>
+                                    <label for="m-btn">
+                                        <input type="radio" id="m-btn">
+                                        m
+                                    </label>
+                                    <label for="l-btn">
+                                        <input type="radio" id="l-btn">
+                                        l
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Mô tả sản phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            @* @Html.Raw(@Model.MoTaSanPham) *@
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <h6>Dũng</h6>
+                            <p>
+                                Shop giao hàng nhanh, đóng gói rất cẩn thận, giày lên chân cực êm, bảo vệ chân rất tốt, được ông bạn giới thiệu mua giày của shop vô cùng hài lòng 5* cho shop
+                            </p>
+                            <div class="rating">
+                                <i style="color: #FFCC00" class='bx bxs-star'></i>
+                                <i style="color: #FFCC00" class='bx bxs-star'></i>
+                                <i style="color: #FFCC00" class='bx bxs-star'></i>
+                                <i style="color: #FFCC00" class='bx bxs-star'></i>
+                                <i style="color: #FFCC00" class='bx bxs-star'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="related__title">
+                    <h5>Sản phẩm liên quan</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic">
+                        <img src="~/img/giay.jpg" alt="">
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Giày</a></h6>
+                        <div class="rating">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <div class="product__price">1,000,000 Đ</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic">
+                        <img src="~/img/giay.jpg" alt="">
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Giày</a></h6>
+                        <div class="rating">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <div class="product__price">1,000,000 Đ</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic">
+                        <img src="~/img/giay.jpg" alt="">
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Giày</a></h6>
+                        <div class="rating">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <div class="product__price">1,000,000 Đ</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic">
+                        <img src="~/img/giay.jpg" alt="">
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">Giày</a></h6>
+                        <div class="rating">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <div class="product__price">1,000,000 Đ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const prices = document.querySelectorAll('.price-display');
+        prices.forEach(price => {
+            let priceText = price.textContent.trim();
+            let priceValue = parseInt(priceText.replace(/\D/g, '')); // Remove any non-digit characters
+
+            if (priceValue >= 1000000) {
+                // Format as x.000.000
+                let millions = Math.floor(priceValue / 1000000);
+                let thousands = Math.floor((priceValue % 1000000) / 1000);
+                price.textContent = `${millions}.${thousands.toString().padStart(3, '0')}.000 đ`;
+            } else {
+                // Format as x.000
+                let thousands = priceValue / 1000;
+                price.textContent = `${thousands.toFixed(3).replace('.', '.')} đ`;
+            }
+        });
+    });
+</script>

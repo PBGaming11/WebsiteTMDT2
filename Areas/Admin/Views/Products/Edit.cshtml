@@ -57,7 +57,7 @@
                         @Html.AntiForgeryToken() <!-- Ensures that the form has an anti-forgery token -->
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(x => x.Id)
-                        @Html.HiddenFor(x => x.ProductCategoryId)
+                        @Html.HiddenFor(x => x.Image)
                         @Html.HiddenFor(x => x.CreateDate)
                         <div class="card-header p-2">
                             <ul class="nav nav-pills">

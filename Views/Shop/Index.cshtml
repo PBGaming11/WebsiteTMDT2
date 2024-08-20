@@ -1,4 +1,4 @@
-﻿@* @model IEnumerable<SanPham> *@
+﻿@model IEnumerable<WebsiteTMDT.Areas.Admin.Models.EF.Product>
 
 <section class="hero">
     <div class="container">
@@ -66,22 +66,32 @@
                     </div>
                 </div>
                 <div class="row">
-                    @* @foreach (var item in Model)
+                    @foreach (var item in Model)
                     {
                         <div class="col-lg-4 col-md-6 col-sm-6">
-                            <a asp-action="Index" asp-controller="product_detail" asp-route-id="@item.IdSanPham">
+                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id">
                                 <div class="product__item click">
                                     <div class="product__item__pic position-relative">
-                                        <!-- Sale Icon -->
-                                        <div class="sale-icon">
-                                            <i class='bx bxs-discount'></i>
-                                        </div>
-                                        <img src="data:image/png;base64,@item.ImgDaiDien" />
+                                        @if (@item.PriceSale != null && @item.PriceSale > 0)
+                                        {
+                                            <!-- Sale Icon -->
+                                            <div class="sale-icon">
+                                                <i class='bx bxs-discount'></i>
+                                            </div>
+                                        }
+                                        <img src="data:image/png;base64,@item.Image " alt="@item.Title" />
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a>@item.TenSanPham</a></h6>
-                                        <h4 class="price-display">@item.GiamGia</h4>
-                                        <h5 class="price-display">@item.GiaSanpham đ</h5>
+                                        <h6><a asp-action="Index" asp-controller="product_detail" asp-route-id="@item.Id">@item.Title</a></h6>
+                                        @if (@item.PriceSale == null || @item.PriceSale == 0)
+                                        {
+                                            <h4 class="price-display">@item.Price đ</h4>
+                                        }
+                                        else
+                                        {
+                                            <h4 class="price-display">@item.PriceSale đ</h4>
+                                            <h5 class="price-display text-muted"><s>@item.Price đ</s></h5>
+                                        }
                                         <div class="rating">
                                             <span>Đánh giá:</span>
                                             <i class='bx bxs-star'></i>
@@ -96,12 +106,13 @@
                             </a>
                         </div>
 
-                    } *@
+
+                    } 
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__pagination">
-                            @* @if (ViewBag.CurrentPage > 1)
+                            @if (ViewBag.CurrentPage > 1)
                             {
                                 <a href="@Url.Action("Index", new { pageNumber = ViewBag.CurrentPage - 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Previous Page"><i class='bx bx-chevron-left'></i></a>
                             }
@@ -121,7 +132,7 @@
                             @if (ViewBag.CurrentPage < ViewBag.TotalPages)
                             {
                                 <a href="@Url.Action("Index", new { pageNumber = ViewBag.CurrentPage + 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Next Page"><i class='bx bx-chevron-right'></i></a>
-                            } *@
+                            }
                         </div>
                     </div>
                 </div>
