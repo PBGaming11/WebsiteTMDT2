@@ -1,0 +1,150 @@
+﻿@* @model IEnumerable<SanPham> *@
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="@Url.Action("Index", "Shop")" method="get">
+                            <div class="hero__search__categories">
+                                Tìm kiếm
+                            </div>
+                            <input type="text" name="searchQuery" placeholder="Nhập từ khóa tìm kiếm">
+                            <button type="submit" class="site-btn"><i class='bx bx-search'></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <vc:nav-compoments></vc:nav-compoments>
+        </div>
+    </div>
+</section>
+
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <vc:danh-muc-view-compoments></vc:danh-muc-view-compoments>
+            <div class="col-lg-9 col-md-7">
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <form method="get" action="@Url.Action("Index", "Shop")">
+                                    <select name="maxPrice" onchange="this.form.submit()">
+                                        <option selected disabled value="">Chọn giá</option>
+                                        <option value="1000000">Dưới 1.000.000 đ</option>
+                                        <option value="2000000">Dưới 2.000.000 đ</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__sort">
+                                <form method="get" action="@Url.Action("Index", "Shop")">
+                                    <span>Sắp xếp theo:</span>
+                                    <select name="sortOrder" onchange="this.form.submit()">
+                                        <option value="" selected disabled>Chọn</option>
+                                        <option value="asc">Giá:Tăng dần</option>
+                                        <option value="desc">Giá:Giảm dần</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    @* @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <a asp-action="Index" asp-controller="product_detail" asp-route-id="@item.IdSanPham">
+                                <div class="product__item click">
+                                    <div class="product__item__pic position-relative">
+                                        <!-- Sale Icon -->
+                                        <div class="sale-icon">
+                                            <i class='bx bxs-discount'></i>
+                                        </div>
+                                        <img src="data:image/png;base64,@item.ImgDaiDien" />
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a>@item.TenSanPham</a></h6>
+                                        <h4 class="price-display">@item.GiamGia</h4>
+                                        <h5 class="price-display">@item.GiaSanpham đ</h5>
+                                        <div class="rating">
+                                            <span>Đánh giá:</span>
+                                            <i class='bx bxs-star'></i>
+                                            <i class='bx bxs-star'></i>
+                                            <i class='bx bxs-star'></i>
+                                            <i class='bx bxs-star'></i>
+                                            <i class='bx bxs-star'></i>
+                                        </div>
+                                        <h6 class="sold">Đã bán: 6k</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    } *@
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product__pagination">
+                            @* @if (ViewBag.CurrentPage > 1)
+                            {
+                                <a href="@Url.Action("Index", new { pageNumber = ViewBag.CurrentPage - 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Previous Page"><i class='bx bx-chevron-left'></i></a>
+                            }
+
+                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                            {
+                                if (i <= 5 || i >= ViewBag.TotalPages - 5 || (i >= ViewBag.CurrentPage - 2 && i <= ViewBag.CurrentPage + 2))
+                                {
+                                    <a class="@(i == ViewBag.CurrentPage ? "active" : "")" href="@Url.Action("Index", new { pageNumber = i, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })">@i</a>
+                                }
+                                else if (i == 6 || i == ViewBag.TotalPages - 5)
+                                {
+                                    <span>...</span>
+                                }
+                            }
+
+                            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                            {
+                                <a href="@Url.Action("Index", new { pageNumber = ViewBag.CurrentPage + 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Next Page"><i class='bx bx-chevron-right'></i></a>
+                            } *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const prices = document.querySelectorAll('.price-display');
+        prices.forEach(price => {
+            let priceText = price.textContent.trim();
+            let priceValue = parseInt(priceText.replace(/\D/g, '')); // Remove any non-digit characters
+
+            if (priceValue >= 1000000) {
+                // Format as x.000.000
+                let millions = Math.floor(priceValue / 1000000);
+                let thousands = Math.floor((priceValue % 1000000) / 1000);
+                price.textContent = `${millions}.${thousands.toString().padStart(3, '0')}.000 đ`;
+            } else {
+                // Format as x.000
+                let thousands = priceValue / 1000;
+                price.textContent = `${thousands.toFixed(3).replace('.', '.')} đ`;
+            }
+        });
+    });
+</script>

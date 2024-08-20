@@ -1,0 +1,17 @@
+﻿@* @model IEnumerable<DanhMuc>
+@{
+    var selectedCategory = ViewBag.SelectedCategory as DanhMuc;
+}
+<div class="col-lg-12 text-center">
+    <div class="breadcrumb__links">
+        <div class="breadcrumb__option">
+            <a asp-action="Index" asp-controller="Home">Trang chủ</a> /
+            <a asp-action="Index" asp-controller="Shop">Cửa hàng</a>
+            @if (selectedCategory != null)
+            {
+                <a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@selectedCategory.Id">/ @selectedCategory.Namedanhmuc</a> 
+            }
+        </div>
+    </div>
+</div>
+ *@

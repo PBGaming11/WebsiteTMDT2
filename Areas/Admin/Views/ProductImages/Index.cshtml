@@ -1,0 +1,149 @@
+﻿@model IEnumerable<WebsiteTMDT.Areas.Admin.Models.EF.ProductImage>
+
+@{
+    ViewData["Title"] = "Ảnh sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutProductImage.cshtml";
+}
+<style>
+    .card-body {
+        padding: 15px;
+        background-color: #f9f9f9;
+    }
+
+    .glImage {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .glImage li {
+            position: relative;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px); /* Adjust width based on the number of items per row */
+        }
+
+        .glImage img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+    .box-btn {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+        .box-btn a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+            .box-btn a.btnDelete {
+                background-color: #dc3545; /* Red color */
+            }
+</style>
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Ảnh sản phẩm</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-danger" title="Collapse">
+                    Xóa hết
+                </button>
+                <input type="file" id="imageFile" class="btn btn-success">
+            </div>
+        </div>
+        <div class="card-body">
+            <ul class="glImage">
+                @if (Model != null)
+                {
+                    foreach(var item in Model)
+                    {
+                        <li id="trow_@item.Id">
+                            <img src="data:image/png;base64,@item.Image" width="200" />
+                            <div class="box-btn">
+                                <a href="#" data-id="@item.Id" class="btn btn-danger btnDelete"><i class="fa fa-trash"></i></a>
+                                @if(item.IsDefault)
+                                {
+                                    <a href="#" data-id="@item.Id" class="btn btn-success btnDefault"><i class="fa fa-check"></i></a>
+                                }else
+                                {
+                                    <a href="#" data-id="@item.Id" class="btn btn-success btnDefault"><i class="fa fa-times"></i></a>
+                                }
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.btnDelete', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Bạn có muốn xóa không ?');
+            if (conf == true) {
+                $.ajax({
+                    url: '/Admin/ProductImages/Delete',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#trow_' + id).remove();
+                        }
+                    }
+
+                });
+            }
+        });
+        
+        document.getElementById('imageFile').addEventListener('change', function () {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var base64String = e.target.result.split(',')[1];
+                    Addimage(@ViewBag.ProductId,base64String);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        function Addimage(id, url) {
+            $.ajax({
+                url: '/Admin/ProductImages/AddImage',
+                type: 'POST',
+                data: { productId: id, url: url },
+                success: function (rs) {
+                    if (rs.success) {
+                        window.location.reload();
+                    }
+                }
+
+            });
+        }
+    });
+</script>
