@@ -1,6 +1,6 @@
-﻿@* @model IEnumerable<DanhMuc>
+﻿@model IEnumerable<WebsiteTMDT.Areas.Admin.Models.EF.ProductCategory>
 @{
-    var selectedCategory = ViewBag.SelectedCategory as DanhMuc;
+    var selectedCategory = ViewBag.SelectedCategory as WebsiteTMDT.Areas.Admin.Models.EF.ProductCategory;
 }
 <div class="col-lg-12 text-center">
     <div class="breadcrumb__links">
@@ -9,9 +9,9 @@
             <a asp-action="Index" asp-controller="Shop">Cửa hàng</a>
             @if (selectedCategory != null)
             {
-                <a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@selectedCategory.Id">/ @selectedCategory.Namedanhmuc</a> 
+                <a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@selectedCategory.Id">/ @selectedCategory.Title</a> 
             }
         </div>
     </div>
 </div>
- *@
+ 

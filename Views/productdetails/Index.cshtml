@@ -1,11 +1,11 @@
-﻿@* @model Website.Models.SanPham *@
+﻿@model WebsiteTMDT.Areas.Admin.Models.EF.Product
 
 @{
-    
+    var selectedCategory = ViewBag.SelectedCategory as WebsiteTMDT.Areas.Admin.Models.EF.ProductCategory; // Corrected the type
+    var selectedProduct = ViewBag.SelectedProduct as WebsiteTMDT.Areas.Admin.Models.EF.Product; // Corrected the type
+    ViewBag.Title = Model.Title;
 }
-@* var selectedCategory = ViewBag.SelectedCategory as DanhMuc;
-    var selectedProduct = ViewBag.SelectedProduct as SanPham;
-    ViewBag.Title = Model.TenSanPham; *@
+
 <section class="hero">
     <div class="container">
         <div class="row">
@@ -36,14 +36,14 @@
                     <div class="breadcrumb__option" style="margin-left: 100px">
                         <a asp-action="Index" asp-controller="Home">Trang chủ</a> /
                         <a asp-action="Index" asp-controller="Shop">Cửa hàng</a>
-                        @* @if (selectedCategory != null)
+                        @if (selectedCategory != null)
                         {
-                            <a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@selectedCategory.Id">/ @selectedCategory.Namedanhmuc /</a>
+                            <a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@selectedCategory.Id">/ @selectedCategory.Title /</a>
                         }
                         @if (selectedProduct != null)
                         {
-                            <span>@selectedProduct.TenSanPham</span>
-                        } *@
+                            <span>@selectedProduct.Title</span>
+                        }
                     </div>
                 </div>
             </div>
@@ -57,25 +57,25 @@
             <div class="col-lg-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__left product__thumb nice-scroll">
-                        @* <a class="pt active" href="#product-1">
-                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                        <a class="pt active" href="#product-1">
+                            <img src="data:image/png;base64,@Model.Image" alt="">
                         </a>
                         <a class="pt" href="#product-2">
-                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                            <img src="data:image/png;base64,@Model.Image" alt="">
                         </a>
                         <a class="pt" href="#product-3">
-                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
+                            <img src="data:image/png;base64,@Model.Image" alt="">
                         </a>
                         <a class="pt" href="#product-4">
-                            <img src="data:image/png;base64,@Model.ImgDaiDien" alt="">
-                        </a> *@
+                            <img src="data:image/png;base64,@Model.Image" alt="">
+                        </a>
                     </div>
                     <div class="product__details__slider__content">
                         <div class="product__details__pic__slider owl-carousel">
-                            @* <img data-hash="product-1" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt="">
-                            <img data-hash="product-2" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt="">
-                            <img data-hash="product-3" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt="">
-                            <img data-hash="product-4" class="product__big__img" src="data:image/png;base64,@Model.ImgDaiDien" alt=""> *@
+                            <img data-hash="product-1" class="product__big__img" src="data:image/png;base64,@Model.Image" alt="">
+                            <img data-hash="product-2" class="product__big__img" src="data:image/png;base64,@Model.Image" alt="">
+                            <img data-hash="product-3" class="product__big__img" src="data:image/png;base64,@Model.Image" alt="">
+                            <img data-hash="product-4" class="product__big__img" src="data:image/png;base64,@Model.Image" alt="">
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
             <div class="col-lg-6">
                 <div class="product__details__text">
                     <h3>
-                        @* @Model.TenSanPham *@
+                        @Model.Title
                         <div class="rating">
                             <i class='bx bxs-star'></i>
                             <i class='bx bxs-star'></i>
@@ -94,7 +94,13 @@
                         </div>
                     </h3>
                     <div class="product__details__price">
-                        @* <a class="price-display">@Model.GiamGia</a><span class="price-display">@Model.GiaSanpham</spa> *@
+                        @if(Model.IsSale == true)
+                        {
+                            <a class="price-display">@Model.PriceSale</a><span class="price-display">@Model.Price</span>
+                        }else
+                        {
+                            <a class="price-display">@Model.Price</a>
+                        }
                     </div>
                     <div class="product__details__button">
                         <div class="quantity-heart">
@@ -175,7 +181,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            @* @Html.Raw(@Model.MoTaSanPham) *@
+                            @Html.Raw(@Model.Detail)
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <h6>Dũng</h6>

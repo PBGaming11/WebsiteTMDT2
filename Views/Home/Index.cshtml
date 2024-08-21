@@ -68,14 +68,21 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix aonam">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            @if (@item.IsSale == true)
+                            {
+                                <!-- Sale Icon -->
+                                <div class="sale-icon">
+                                    <i class='bx bxs-discount'></i>
+                                </div>
+                            }
+                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
                                 <li><a href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
                             <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
@@ -88,14 +95,14 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix aonu">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
                                 <li><a href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
                             <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
@@ -108,14 +115,21 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix giaydep">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            @if (@item.IsSale == true)
+                            {
+                                <!-- Sale Icon -->
+                                <div class="sale-icon">
+                                    <i class='bx bxs-discount'></i>
+                                </div>
+                            }
+                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
                                 <li><a href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
                             <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
@@ -128,14 +142,21 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix phukien">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            @if (@item.IsSale == true)
+                            {
+                                <!-- Sale Icon -->
+                                <div class="sale-icon">
+                                    <i class='bx bxs-discount'></i>
+                                </div>
+                            }
+                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
                                 <li><a href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
                             <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
@@ -148,14 +169,21 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix aocon">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            @if (@item.IsSale == true)
+                            {
+                                <!-- Sale Icon -->
+                                <div class="sale-icon">
+                                    <i class='bx bxs-discount'></i>
+                                </div>
+                            }
+                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
                                 <li><a href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id"><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
                             <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>

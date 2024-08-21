@@ -41,6 +41,18 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "porudctDetail",
+        pattern: "{alias}-p{id}",
+        defaults: new { controller = "productdetails", action = "Index" });
+
+    endpoints.MapControllerRoute(
+        name: "shop_alias",
+        pattern: "{alias}",
+        defaults: new { controller = "Shop", action = "Index" });
+});
 
 app.MapControllerRoute(
     name: "areas",

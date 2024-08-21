@@ -3,12 +3,19 @@
 @foreach (var item in Model)
 {
     <div class="latest-product__slider__item">
-        <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id" class="latest-product__item">
+        <a href="/@item.Alias-p@(item.Id)" class="latest-product__item">
             <div class="latest-product__item__pic">
                 <img src="data:image/png;base64,@item.Image" alt="">
             </div>
             <div class="latest-product__item__text">
-                <h6 class="product-name">@item.Title</h6>
+                @if (item.IsSale == true)
+                {
+                    <h6 class="product-name"><a>(Sale)</a> @item.Title</h6>
+                }
+                else
+                {
+                    <h6 class="product-name">@item.Title</h6>
+                }
             </div>
             <div class="latest-product__item__text">
                 <span class="price-display">@item.Price</span>

@@ -964,13 +964,16 @@ ol {
 
 
     }
-        .latest-product__item__text span {
-            font-size: 18px;
-            display: block;
-            color: #DC0000;
-            font-weight: 700;
-            text-align: center;
-        }
+    .latest-product__item__text h6 a {
+        color: #DC0000;
+    }
+    .latest-product__item__text span {
+        font-size: 18px;
+        display: block;
+        color: #DC0000;
+        font-weight: 700;
+        text-align: center;
+    }
 
 .product-name {
     display: inline-block; /* Or use block if needed */

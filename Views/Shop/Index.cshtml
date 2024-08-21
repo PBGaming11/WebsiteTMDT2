@@ -69,7 +69,7 @@
                     @foreach (var item in Model)
                     {
                         <div class="col-lg-4 col-md-6 col-sm-6">
-                            <a asp-action="Index" asp-controller="product_details" asp-route-id="@item.Id">
+                            <a href="/@item.Alias-p@(item.Id)">
                                 <div class="product__item click">
                                     <div class="product__item__pic position-relative">
                                         @if (@item.PriceSale != null && @item.PriceSale > 0)
@@ -82,7 +82,7 @@
                                         <img src="data:image/png;base64,@item.Image " alt="@item.Title" />
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a asp-action="Index" asp-controller="product_detail" asp-route-id="@item.Id">@item.Title</a></h6>
+                                        <h6><a href="/@item.Alias-p@(item.Id)">>@item.Title</a></h6>
                                         @if (@item.PriceSale == null || @item.PriceSale == 0)
                                         {
                                             <h4 class="price-display">@item.Price đ</h4>
