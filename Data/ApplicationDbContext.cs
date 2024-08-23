@@ -12,6 +12,11 @@ namespace WebsiteTMDT.Data
             : base(options)
         {
         }
+
+        public ApplicationDbContext()
+        {
+        }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Adv> Advs { get; set; }
         public DbSet<Post> Posts { get; set; }

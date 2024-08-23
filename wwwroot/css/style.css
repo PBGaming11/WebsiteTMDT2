@@ -1397,7 +1397,13 @@ ol {
     color: red; /* Adjust the color */
     padding-left: 5px;
 }
-
+.price-displays {
+    font-size: 18px;
+    color: #b1b0b0;
+    text-decoration: line-through;
+    margin-left: 10px;
+    display: inline-block;
+}
 .product__item__text h5 {
     margin-bottom: 10px;
 }

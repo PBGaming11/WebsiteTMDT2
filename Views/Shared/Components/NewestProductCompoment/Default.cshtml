@@ -18,7 +18,15 @@
                 }
             </div>
             <div class="latest-product__item__text">
-                <span class="price-display">@item.Price</span>
+                @if (item.IsSale == true)
+                {
+                    <span class="price-display">@item.PriceSale</span>
+                    <span class="price-display price-displays" style="color: #b1b0b0">@item.Price</span>
+                }
+                else
+                {
+                    <span class="price-display">@item.Price</span>
+                }
             </div>
         </a>
     </div>

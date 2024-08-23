@@ -6,12 +6,11 @@
     <div class="breadcrumb__links">
         <div class="breadcrumb__option">
             <a asp-action="Index" asp-controller="Home">Trang chủ</a> /
-            <a asp-action="Index" asp-controller="Shop">Cửa hàng</a>
+            <a asp-action="Index" asp-controller="Shop" asp-route-categoryAlias="">Cửa hàng</a>
             @if (selectedCategory != null)
             {
-                <a asp-action="Index" asp-controller="Shop" asp-route-categoryId="@selectedCategory.Id">/ @selectedCategory.Title</a> 
+                <a asp-action="Index" asp-controller="Shop" asp-route-categoryAlias="@selectedCategory.Alias">/ @selectedCategory.Title</a>
             }
         </div>
     </div>
 </div>
- 

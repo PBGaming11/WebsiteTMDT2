@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using WebsiteTMDT.Data;
+using WebsiteTMDT.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,9 @@ builder.Services.AddControllersWithViews()
                 {
                     options.HtmlHelperOptions.ClientValidationEnabled = true;
                 });
-
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -38,22 +41,19 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "porudctDetail",
         pattern: "{alias}-p{id}",
         defaults: new { controller = "productdetails", action = "Index" });
-
-    endpoints.MapControllerRoute(
-        name: "shop_alias",
-        pattern: "{alias}",
-        defaults: new { controller = "Shop", action = "Index" });
 });
-
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");

@@ -12,16 +12,19 @@ namespace WebsiteTMDT.Controllers
         {
             _db = db;
         }
-        public IActionResult Index(int? categoryId, double? minPrice, double? maxPrice, string sortOrder, string searchQuery, int pageNumber = 1, int pageSize = 6)
+        public IActionResult Index(string categoryAlias, double? minPrice, double? maxPrice, string sortOrder, string searchQuery, int pageNumber = 1, int pageSize = 6)
         {
             var products = _db.Products.AsQueryable();
             ProductCategory selectedCategory = null;
 
-            // Filter by category
-            if (categoryId.HasValue)
+            // Tìm danh mục dựa trên Alias
+            if (!string.IsNullOrEmpty(categoryAlias))
             {
-                products = products.Where(p => p.ProductCategoryId == categoryId.Value);
-                selectedCategory = _db.ProductCategories.Find(categoryId.Value);
+                selectedCategory = _db.ProductCategories.FirstOrDefault(c => c.Alias == categoryAlias);
+                if (selectedCategory != null)
+                {
+                    products = products.Where(p => p.ProductCategoryId == selectedCategory.Id);
+                }
             }
 
             // Filter by price range
@@ -62,11 +65,12 @@ namespace WebsiteTMDT.Controllers
             ViewBag.MinPrice = minPrice;
             ViewBag.MaxPrice = maxPrice;
             ViewBag.SortOrder = sortOrder;
-            ViewBag.CategoryId = categoryId;
+            ViewBag.CategoryAlias = categoryAlias;
             ViewBag.SelectedCategory = selectedCategory;
             ViewBag.SearchQuery = searchQuery;
 
             return View(paginatedProducts);
         }
+
     }
 }

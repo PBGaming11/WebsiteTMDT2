@@ -113,8 +113,8 @@
                             <a href="#" class="heart-icon"><span class='bx bxs-heart'></span></a>
                         </div>
                         <div class="buttons">
-                            <a href="#" class="cart-btn"><i class='bx bx-cart'></i>Cho vào giỏ hàng</a>
-                            <a href="#" class="buy-now-btn">Mua ngay</a>
+                            <a href="#" data-id="@Model.Id" id="addToCartButton" class="cart-btn cart"><i class='bx bx-cart'></i>Cho vào giỏ hàng</a>
+                            <a href="#" class="buy-now-btn cart">Mua ngay</a>
                         </div>
                     </div>
                     <div class="product__details__widget">
@@ -206,77 +206,42 @@
                     <h5>Sản phẩm liên quan</h5>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic">
-                        <img src="~/img/giay.jpg" alt="">
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Giày</a></h6>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
+            @foreach (var product in ViewBag.RelatedProducts as List<WebsiteTMDT.Areas.Admin.Models.EF.Product>)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic">
+                            @if (product.IsSale == true)
+                            {
+                                <!-- Sale Icon -->
+                                <div class="sale-icon">
+                                    <i class='bx bxs-discount'></i>
+                                </div>
+                            }
+                            <img src="data:image/png;base64,@product.Image" alt="">
                         </div>
-                        <div class="product__price">1,000,000 Đ</div>
+                        <div class="product__item__text">
+                            <h6><a href="#">@product.Title</a></h6>
+                            <div class="rating">
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                            </div>
+                            @if(product.IsSale == true)
+                            {
+                                <div class="price-display">@product.PriceSale</div>
+                                <div class="price-display price-displays ">@product.Price</div>
+                            }else
+                            {
+                                <div class="price-display">@product.Price</div>
+                            }
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic">
-                        <img src="~/img/giay.jpg" alt="">
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Giày</a></h6>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="product__price">1,000,000 Đ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic">
-                        <img src="~/img/giay.jpg" alt="">
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Giày</a></h6>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="product__price">1,000,000 Đ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic">
-                        <img src="~/img/giay.jpg" alt="">
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Giày</a></h6>
-                        <div class="rating">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="product__price">1,000,000 Đ</div>
-                    </div>
-                </div>
+            }
             </div>
         </div>
     </div>

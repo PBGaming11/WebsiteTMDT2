@@ -72,20 +72,27 @@
                             {
                                 <!-- Sale Icon -->
                                 <div class="sale-icon">
-                                    <i class='bx bxs-discount'></i>
+                                    <i style="color: #DC0000;" class='bx bxs-discount'></i>
                                 </div>
                             }
-                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            <a href="/@item.Alias-p@(item.Id)"><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
-                                <li><a href="#"><i class='bx bx-cart'></i></a></li>
+                                <li><a data-id="@item.Id" id="addToCartButton" href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)"><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
-                            <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            @if (item.IsSale == true)
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.PriceSale</h5>
+                            }
+                            else
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            }
                         </div>
                     </div>
                 </div>
@@ -95,17 +102,33 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix aonu">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg">
-                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            <a href="/@item.Alias-p@(item.Id)">
+                                @if (@item.IsSale == true)
+                                {
+                                    <!-- Sale Icon -->
+                                    <div class="sale-icon">
+                                        <i style="color: #DC0000;" class='bx bxs-discount'></i>
+                                    </div>
+                                }
+                                <img src="data:image/png;base64,@item.Image" alt="">
+                                </a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
-                                <li><a href="#"><i class='bx bx-cart'></i></a></li>
+                                <li><a data-id="@item.Id" id="addToCartButton" href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)"><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
-                            <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            @if (item.IsSale == true)
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.PriceSale</h5>
+                            }
+                            else
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            }
                         </div>
                     </div>
                 </div>
@@ -119,20 +142,27 @@
                             {
                                 <!-- Sale Icon -->
                                 <div class="sale-icon">
-                                    <i class='bx bxs-discount'></i>
+                                    <i style="color: #DC0000;" class='bx bxs-discount'></i>
                                 </div>
                             }
-                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            <a href="/@item.Alias-p@(item.Id)"><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
-                                <li><a href="#"><i class='bx bx-cart'></i></a></li>
+                                <li><a data-id="@item.Id" id="addToCartButton" href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)"><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
-                            <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            @if (item.IsSale == true)
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.PriceSale</h5>
+                            }
+                            else
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            }
                         </div>
                     </div>
                 </div>
@@ -146,20 +176,27 @@
                             {
                                 <!-- Sale Icon -->
                                 <div class="sale-icon">
-                                    <i class='bx bxs-discount'></i>
+                                    <i style="color: #DC0000;" class='bx bxs-discount'></i>
                                 </div>
                             }
-                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            <a href="/@item.Alias-p@(item.Id)"><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
-                                <li><a href="#"><i class='bx bx-cart'></i></a></li>
+                                <li><a data-id="@item.Id" id="addToCartButton" href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)"><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
-                            <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            @if (item.IsSale == true)
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.PriceSale</h5>
+                            }
+                            else
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            }
                         </div>
                     </div>
                 </div>
@@ -173,20 +210,27 @@
                             {
                                 <!-- Sale Icon -->
                                 <div class="sale-icon">
-                                    <i class='bx bxs-discount'></i>
+                                    <i style="color: #DC0000;" class='bx bxs-discount'></i>
                                 </div>
                             }
-                            <a href="/@item.Alias-p@(item.Id)">><img src="data:image/png;base64,@item.Image" alt=""></a>
+                            <a href="/@item.Alias-p@(item.Id)"><img src="data:image/png;base64,@item.Image" alt=""></a>
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class='bx bxs-heart-circle'></i></a></li>
-                                <li><a href="#"><i class='bx bx-cart'></i></a></li>
+                                <li><a data-id="@item.Id" id="addToCartButton" href="#"><i class='bx bx-cart'></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <a href="/@item.Alias-p@(item.Id)">><h6>@item.Title</h6></a>
+                            <a href="/@item.Alias-p@(item.Id)"><h6>@item.Title</h6></a>
                         </div>
                         <div class="featured__item__text">
-                            <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            @if (item.IsSale == true)
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.PriceSale</h5>
+                            }
+                            else
+                            {
+                                <h5 style="color: #DC0000;" class="price-display">@item.Price</h5>
+                            }
                         </div>
                     </div>
                 </div>
@@ -236,3 +280,23 @@
     </div>
 </section>
 <!-- Latest Product Section End -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const prices = document.querySelectorAll('.price-display');
+        prices.forEach(price => {
+            let priceText = price.textContent.trim();
+            let priceValue = parseInt(priceText.replace(/\D/g, '')); // Remove any non-digit characters
+
+            if (priceValue >= 1000000) {
+                // Format as x.000.000
+                let millions = Math.floor(priceValue / 1000000);
+                let thousands = Math.floor((priceValue % 1000000) / 1000);
+                price.textContent = `${millions}.${thousands.toString().padStart(3, '0')}.000 đ`;
+            } else {
+                // Format as x.000
+                let thousands = priceValue / 1000;
+                price.textContent = `${thousands.toFixed(3).replace('.', '.')} đ`;
+            }
+        });
+    });
+</script>

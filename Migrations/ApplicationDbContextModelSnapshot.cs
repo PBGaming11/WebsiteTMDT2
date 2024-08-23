@@ -580,7 +580,6 @@ namespace WebsiteTMDT.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Alias")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreateBy")
@@ -619,11 +618,11 @@ namespace WebsiteTMDT.Migrations
                     b.Property<DateTime>("ModifierDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
-                    b.Property<decimal?>("PriceSale")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("PriceSale")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
@@ -678,8 +677,7 @@ namespace WebsiteTMDT.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Icon")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModifierBy")
                         .HasColumnType("nvarchar(max)");

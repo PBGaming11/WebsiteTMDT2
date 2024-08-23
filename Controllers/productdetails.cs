@@ -29,6 +29,13 @@ namespace WebsiteTMDT.Controllers
                 return NotFound();
             }
 
+            var relatedProducts = _db.Products
+                                     .Where(p => p.ProductCategoryId == sanpham.ProductCategoryId && p.Id != id)
+                                     .OrderBy(p => Guid.NewGuid()) // Randomize
+                                     .Take(4)
+                                     .ToList();
+
+            ViewBag.RelatedProducts = relatedProducts;
             // Set ViewBag properties for the view
             ViewBag.SelectedCategory = sanpham.ProductCategory;
             ViewBag.SelectedProduct = sanpham;
