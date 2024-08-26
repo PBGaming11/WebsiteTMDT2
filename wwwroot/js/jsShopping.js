@@ -1,10 +1,35 @@
 ﻿$(document).ready(function () {
-    // Xử lý sự kiện click cho các nút thêm vào giỏ hàng
-    $(document).on('click', '#addToCartButton', function (event) {
-        event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+    // Function to update the cart item count
+    function updateCartItemCount() {
+        $.getJSON('/ShoppingCart/GetCartItemCount', function (data) {
+            $('#checkout_items').text(data);
+        });
+    }
 
-        var productId = $(this).data('id'); // Lấy ID sản phẩm từ thuộc tính data-id
-        var quantity = 1; // Hoặc lấy từ một trường input nếu có
+    // Function to update the cart total price
+    function updateCartTotal(newTotal) {
+        $('#cartTotal').text(newTotal.toLocaleString('vi-VN') + ' Đ');
+    }
+
+    // Function to fetch the cart total from the server and update the UI
+    function fetchCartTotal() {
+        $.getJSON('/ShoppingCart/GetCartTotal', function (data) {
+            if (data.total) {
+                updateCartTotal(data.total);
+            }
+        });
+    }
+
+    // Call these functions when the page loads to ensure the count and total are up-to-date
+    updateCartItemCount();
+    fetchCartTotal();
+
+    // Handle click event for adding items to the cart
+    $(document).on('click', '#addToCartButton', function (event) {
+        event.preventDefault(); // Prevent default action
+
+        var productId = $(this).data('id'); // Get product ID from data-id
+        var quantity = 1; // Default quantity or get from input if available
 
         var item = {
             productId: productId,
@@ -18,11 +43,8 @@
             data: JSON.stringify(item),
             success: function (response) {
                 if (response.success) {
-                    // Tăng số lượng sản phẩm trong giỏ hàng
-                    var currentCount = parseInt($('#checkout_items').text());
-                    $('#checkout_items').text(currentCount + 1);
-
-                    // Cập nhật tổng tiền
+                    // Update cart item count and total price
+                    updateCartItemCount();
                     updateCartTotal(response.newTotal);
 
                     alert('Sản phẩm đã được thêm vào giỏ hàng.');
@@ -30,18 +52,63 @@
                     alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
                 }
             },
-            error: function (xhr, status, error) {
+            error: function () {
                 alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.');
             }
         });
     });
 
-    function updateCartTotal(newTotal) {
-        $('#cartTotal').text(newTotal.toLocaleString('vi-VN') + ' Đ');
-        $('#checkoutTotal').text(newTotal.toLocaleString('vi-VN') + ' Đ');
-    }
+    // Handle click event for removing items from the cart
+    $(document).on('click', '.remove-from-cart', function (e) {
+        e.preventDefault();
+        var productId = $(this).data('id');
 
-    // Cập nhật giá trị tổng tiền khi trang được tải
-    var initialTotal = parseFloat($('#cartTotal').text().replace(/[^0-9.-]+/g, ""));
-    updateCartTotal(initialTotal);
+        $.ajax({
+            type: 'POST',
+            url: '/ShoppingCart/RemoveFromCart',
+            data: { productId: productId },
+            success: function (response) {
+                if (response.success) {
+                    updateCartItemCount();
+                    fetchCartTotal(); // Fetch the updated total price
+                } else {
+                    alert('Failed to remove item from cart.');
+                }
+            },
+            error: function () {
+                alert('An error occurred while removing the item from the cart.');
+            }
+        });
+    });
+
+    // Handle change event for cart item quantity
+    $(document).on('change', '.pro-qty-2 input.cart-item-quantity', function () {
+        var $input = $(this);
+        var quantity = parseInt($input.val(), 10);
+        var productId = $input.data('id');
+
+        if (quantity > 0) {
+            // Send update request to the server
+            $.ajax({
+                url: '/ShoppingCart/UpdateCartItem',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ productId: productId, quantity: quantity }),
+                success: function (response) {
+                    if (response.success) {
+                        // Update cart item count and total price
+                        updateCartItemCount();
+                        fetchCartTotal(); // Fetch the updated total price
+                    } else {
+                        alert('Error updating cart item.');
+                    }
+                },
+                error: function () {
+                    alert('Error updating cart item.');
+                }
+            });
+        } else {
+            alert('Quantity must be greater than 0.');
+        }
+    });
 });

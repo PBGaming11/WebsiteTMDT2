@@ -13,40 +13,59 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="shopping__cart__table">
+                    <br />
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Sản phẩm</th>
-                                <th>Số lượng</th>
-                                <th>Giá tiền</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                        @if (Model != null && Model.Any())
+                        {
+                            <thead>
                                 <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="data:image/png;base64,@item.ImageUrl" alt="@item.ProductName">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>@item.ProductName</h6>
-                                            <h5>@item.Price.ToString("N0") Đ</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="@item.Quantity">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">@item.Price.ToString("N0") Đ</td>
-                                    <td class="cart__close"><a href="#"><i class='bx bx-x'></i></a></td>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá tiền</th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <img src="data:image/png;base64,@item.ImageUrl" alt="@item.ProductName">
+                                            </div>
+                                            <div class="product__cart__item__text">
+                                                <h6>@item.ProductName</h6>
+                                                <h5>@item.Price.ToString("N0") Đ</h5>
+                                            </div>
+                                        </td>
+                                        <td class="quantity__item">
+                                            <div class="quantity">
+                                                <div class="pro-qty-2">
+                                                    <input type="text"
+                                                           value="@item.Quantity"
+                                                           min="1"
+                                                           data-id="@item.ProductId"
+                                                           class="cart-item-quantity">
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="cart__price">@item.Price.ToString("N0") Đ</td>
+                                        <td class="cart__close">
+                                            <a href="javascript:void(0);" class="remove-from-cart" data-id="@item.ProductId"><i class='bx bx-x'></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                        else
+                        {
+                            <tr>
+                                <th>
+                                    <p>Không có sản phẩm trong giỏ hàng! Mời bạn vào trang <a asp-action="Index" asp-controller="Shop">cửa hàng</a> để mua hàng</p>
+                                </th>
+                            </tr>
+                        }
                     </table>
                 </div>
                 <div class="row">
@@ -61,9 +80,10 @@
                     <ul>
                         <li>Tổng tiền <span>@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</span></li>
                     </ul>
-                    <a asp-action="Checkout" asp-controller="Order" class="primary-btn">Thanh toán</a>
+                    <a asp-action="Checkout" asp-controller="ShoppingCart" class="primary-btn">Thanh toán</a>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

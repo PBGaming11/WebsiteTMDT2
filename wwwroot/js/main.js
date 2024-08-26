@@ -236,24 +236,53 @@
         $button.parent().find('input').val(newVal);
     });
 
-    var proQty = $('.pro-qty-2');
-    proQty.prepend('<span class="bx bx-chevron-left dec qtybtn"></span>');
-    proQty.append('<span class="bx bx-chevron-right inc qtybtn"></span>');
-    proQty.on('click', '.qtybtn', function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 1) {
-                var newVal = parseFloat(oldValue) - 1;
+    $(document).ready(function () {
+        var proQty = $('.pro-qty-2');
+
+        proQty.prepend('<span class="bx bx-chevron-left dec qtybtn"></span>');
+        proQty.append('<span class="bx bx-chevron-right inc qtybtn"></span>');
+
+        proQty.on('click', '.qtybtn', function () {
+            var $button = $(this);
+            var $input = $button.parent().find('input');
+            var oldValue = parseFloat($input.val());
+            var productId = $input.data('id');
+            var newVal;
+
+            if ($button.hasClass('inc')) {
+                newVal = oldValue + 1;
             } else {
-                newVal = 1;
+                if (oldValue > 1) {
+                    newVal = oldValue - 1;
+                } else {
+                    newVal = 1;
+                }
             }
-        }
-        $button.parent().find('input').val(newVal);
+
+            $input.val(newVal);
+
+            // AJAX request to update the quantity
+            $.ajax({
+                url: '/ShoppingCart/UpdateCartItem',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ productId: productId, quantity: newVal }),
+                success: function (response) {
+                    if (response.success) {
+                        $('.cart__total li span').text(response.newTotal.toLocaleString() + " Đ");
+                    } else {
+                        alert('Error updating cart');
+                    }
+                },
+                error: function () {
+                    alert('Failed to update cart');
+                }
+            });
+        });
     });
+
+
+
     /*-------------------
        Radio Btn
    --------------------- */
