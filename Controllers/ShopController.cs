@@ -4,6 +4,8 @@ using WebsiteTMDT.Data;
 
 namespace WebsiteTMDT.Controllers
 {
+    [CartTotalFilter]
+    [CartItemCountFilter]
     public class ShopController : Controller
     {
         private readonly ApplicationDbContext _db;

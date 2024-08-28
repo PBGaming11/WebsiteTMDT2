@@ -5,6 +5,8 @@ using WebsiteTMDT.Data;
 
 namespace WebsiteTMDT.Controllers
 {
+    [CartTotalFilter]
+    [CartItemCountFilter]
     public class ProductDetails : Controller
     {
         private readonly ILogger<ProductDetails> _logger;

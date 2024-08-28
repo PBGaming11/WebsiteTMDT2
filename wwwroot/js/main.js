@@ -236,50 +236,58 @@
         $button.parent().find('input').val(newVal);
     });
 
-    $(document).ready(function () {
-        var proQty = $('.pro-qty-2');
+    var proQty = $('.pro-qty-2');
 
-        proQty.prepend('<span class="bx bx-chevron-left dec qtybtn"></span>');
-        proQty.append('<span class="bx bx-chevron-right inc qtybtn"></span>');
+    // Thêm các nút tăng/giảm số lượng
+    proQty.prepend('<span class="bx bx-chevron-left dec qtybtn"></span>');
+    proQty.append('<span class="bx bx-chevron-right inc qtybtn"></span>');
 
-        proQty.on('click', '.qtybtn', function () {
-            var $button = $(this);
-            var $input = $button.parent().find('input');
-            var oldValue = parseFloat($input.val());
-            var productId = $input.data('id');
-            var newVal;
+    // Xử lý sự kiện khi nhấn nút tăng/giảm
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var $input = $button.parent().find('input');
+        var oldValue = parseFloat($input.val());
+        var productId = $input.data('id');
+        var newVal;
 
-            if ($button.hasClass('inc')) {
-                newVal = oldValue + 1;
+        // Tăng hoặc giảm số lượng
+        if ($button.hasClass('inc')) {
+            newVal = oldValue + 1;
+        } else {
+            if (oldValue > 1) {
+                newVal = oldValue - 1;
             } else {
-                if (oldValue > 1) {
-                    newVal = oldValue - 1;
-                } else {
-                    newVal = 1;
-                }
+                newVal = 1;
             }
+        }
 
-            $input.val(newVal);
+        // Cập nhật giá trị input với số lượng mới
+        $input.val(newVal);
 
-            // AJAX request to update the quantity
-            $.ajax({
-                url: '/ShoppingCart/UpdateCartItem',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ productId: productId, quantity: newVal }),
-                success: function (response) {
-                    if (response.success) {
-                        $('.cart__total li span').text(response.newTotal.toLocaleString() + " Đ");
-                    } else {
-                        alert('Error updating cart');
-                    }
-                },
-                error: function () {
-                    alert('Failed to update cart');
+        // Gửi yêu cầu AJAX để cập nhật giỏ hàng
+        $.ajax({
+            url: '/Cart/UpdateCart',
+            type: 'POST',
+            data: {
+                productId: productId,
+                quantity: newVal // Sử dụng giá trị mới
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Cập nhật tổng tiền giỏ hàng
+                    $('#totalAmounts').text(response.totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' Đ');
+                    $('#totalAmount').text(response.totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' Đ');
+                } else {
+                    alert(response.message);
                 }
-            });
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+                alert('Có lỗi xảy ra. Vui lòng thử lại!');
+            }
         });
     });
+
 
 
 

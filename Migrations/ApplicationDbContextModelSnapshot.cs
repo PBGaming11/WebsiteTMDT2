@@ -442,7 +442,6 @@ namespace WebsiteTMDT.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreateBy")
@@ -452,6 +451,10 @@ namespace WebsiteTMDT.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -470,6 +473,9 @@ namespace WebsiteTMDT.Migrations
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TypePayment")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

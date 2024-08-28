@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+}
+@model IEnumerable<WebsiteTMDT.Models.CartItem>
+<h4 class="checktitle3">Giỏ hàng</h4>
+<h2 class="checktitle4">Tổng sản phẩm: @Model.Count()</h2>
+@if (Model != null && Model.Any())
+{
+    <table class="checkout-table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Price.ToString("N0") Đ</td>
+            </tr>
+        }
+        <tr class="total-row">
+            <td>Tổng tiền</td>
+            <td>@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</td>
+        </tr>
+    </table>
+}
+else
+{
+    <div class="empty-cart">
+        <p>Không có sản phẩm trong thanh toán! Mời bạn vào trang <a asp-action="Index" asp-controller="Shop">cửa hàng</a></p>
+    </div>
+}
+

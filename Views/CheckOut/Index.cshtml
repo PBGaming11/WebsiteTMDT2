@@ -2,7 +2,8 @@
     ViewData["Title"] = "Thanh toán";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<WebsiteTMDT.Models.CartItem>
+@using System.Web.Mvc.Ajax
+@model WebsiteTMDT.Models.CheckoutViewModel
 <style>
     /* Title Styles */
     .checktitle {
@@ -36,7 +37,7 @@
     /* Center Alignment */
     .text-center {
         text-align: center;
-    }    
+    }
     /*////////////////*/
     .checkoutform {
         background-color: #f9f9f9;
@@ -60,7 +61,9 @@
         width: 100%;
         border: 1px solid #ddd;
         border-radius: 4px;
-        padding: 0.75rem 1.25rem;
+        padding: 0;
+        padding-left: 5px;
+        margin: 0;
         font-size: 1rem;
         transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         margin-bottom: 1.5rem;
@@ -166,62 +169,47 @@
         </div>
         <hr />
         <h3 class="checktitle2">Thông tin khách hàng</h3>
-            <div class="row">
-                <div class="col-lg-8 checkoutform">
+        <div class="row">
+            <div class="col-lg-8 checkoutform">
+                <form asp-controller="CheckOut" asp-action="ProcessOrder" method="post">
                     <div class="form-group checkoutlable">
                         <label>Họ tên khách hàng</label>
-                        <input type="text" name="CustomerName" class="form-control" autocomplete="off" />
+                        <input asp-for="Order.CustomerName" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Order.CustomerName" class="text-danger"></span>
                     </div>
                     <div class="form-group checkoutlable">
                         <label>Số điện thoại</label>
-                        <input type="text" name="Phone" class="form-control" autocomplete="off" />
+                        <input asp-for="Order.Phone" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Order.Phone" class="text-danger"></span>
                     </div>
                     <div class="form-group checkoutlable">
                         <label>Địa chỉ</label>
-                        <input type="text" name="Address" class="form-control" autocomplete="off" />
+                        <input asp-for="Order.Address" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Order.Address" class="text-danger"></span>
                     </div>
                     <div class="form-group checkoutlable">
                         <label>Email</label>
-                        <input type="text" name="Email" class="form-control" autocomplete="off" />
+                        <input asp-for="Order.Email" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Order.Email" class="text-danger"></span>
                     </div>
                     <div class="form-group checkoutlable">
                         <label>Hình thức thanh toán</label>
-                        <select class="form-control" name="Payment">
-                            <option value="1">Giao hàng thanh toán</option>
+                        <select asp-for="Order.TypePayment" class="form-control">
+                            <option value="1" selected>Giao hàng thanh toán</option>
                             <option value="2">Thanh toán qua ngân hàng</option>
                             <option value="3">Thanh toán qua momo</option>
                             <option value="4">Thanh toán qua VNpay</option>
                         </select>
                     </div>
                     <div class="text-center">
-                        <button type="button" class="btn btn-success">Đặt hàng</button>
+                        <button type="submit" class="btn btn-success">Đặt hàng</button>
                     </div>
-                </div>
+                </form>
+            </div>
             <div class="col-lg-3 checkoutproduct">
                 <h4 class="checktitle3">Giỏ hàng</h4>
-                <h2 class="checktitle4">Tổng sản phẩm: @Model.Count()</h2>
-                @if (Model != null && Model.Any())
-                {
-                    <table class="checkout-table">
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.ProductName</td>
-                                <td>@item.Price.ToString("N0") Đ</td>
-                            </tr>
-                        }
-                        <tr class="total-row">
-                            <td>Tổng tiền</td>
-                            <td>@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</td>
-                        </tr>
-                    </table>
-                }
-                else
-                {
-                    <div class="empty-cart">
-                        <p>Không có sản phẩm trong thanh toán! Mời bạn vào trang <a asp-action="Index" asp-controller="Shop">cửa hàng</a></p>
-                    </div>
-                }
+                @Html.Partial("_CartPartial", Model.CartItems)
             </div>
+        </div>
     </div>
 </section>

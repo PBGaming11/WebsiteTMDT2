@@ -7,17 +7,17 @@ using System.Linq;
 
 namespace WebsiteTMDT.Controllers
 {
+    [CartTotalFilter]
+    [CartItemCountFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
-        private readonly IShoppingCartService _shoppingCartService;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, IShoppingCartService shoppingCartService)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
             _db = db;
-            _shoppingCartService = shoppingCartService;
         }
 
         public IActionResult Index()
@@ -25,9 +25,6 @@ namespace WebsiteTMDT.Controllers
             IEnumerable<Product> sanpham = _db.Products.ToList();
 
             // Lấy số lượng sản phẩm trong giỏ hàng
-            var cartItems = _shoppingCartService.GetCartItems();
-            ViewBag.CartItemCount = cartItems.Sum(item => item.Quantity); // Tổng số lượng sản phẩm
-
             return View(sanpham);
         }
 

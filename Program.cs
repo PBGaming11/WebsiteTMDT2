@@ -23,7 +23,6 @@ builder.Services.AddControllersWithViews()
                 });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
-builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -49,6 +48,16 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllerRoute(
+        name: "gioHang",
+        pattern: "gio-hang",
+        defaults: new { controller = "Cart", action = "Index" });
+
+    endpoints.MapControllerRoute(
+        name: "thanhtoan",
+        pattern: "thanh-toan",
+        defaults: new { controller = "CheckOut", action = "Index" });
+
     endpoints.MapControllerRoute(
         name: "porudctDetail",
         pattern: "{alias}-p{id}",

@@ -1,5 +1,4 @@
-﻿
-@model X.PagedList.IPagedList<WebsiteTMDT.Models.CartItem>
+﻿@model X.PagedList.IPagedList<WebsiteTMDT.Models.CartItem>
 @using X.PagedList;
 @using X.Web.PagedList
 
@@ -34,8 +33,17 @@
                                                 <img src="data:image/png;base64,@item.ImageUrl" alt="@item.ProductName">
                                             </div>
                                             <div class="product__cart__item__text">
-                                                <h6>@item.ProductName</h6>
-                                                <h5>@item.Price.ToString("N0") Đ</h5>
+                                                @if(item.Issale == false)
+                                                {
+                                                    <h6>@item.ProductName</h6>
+                                                    <h5>@item.Price.ToString("N0") Đ</h5>
+                                                }else
+                                                {
+                                                    <h4 style="color: red">Sale</h4>
+                                                    <h6>@item.ProductName</h6>
+                                                    <h5>@item.Price.ToString("N0") Đ</h5>
+                                                }
+
                                             </div>
                                         </td>
                                         <td class="quantity__item">
@@ -78,9 +86,10 @@
                 <div class="cart__total">
                     <h6>Tổng tiền giỏ hàng</h6>
                     <ul>
-                        <li>Tổng tiền <span>@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</span></li>
+                        <li>Tổng tiền <span id="totalAmounts">@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</span></li>
                     </ul>
-                    <a asp-action="Checkout" asp-controller="ShoppingCart" class="primary-btn">Thanh toán</a>
+                    </ul>
+                    <a asp-action="Index" asp-controller="Checkout" class="primary-btn">Thanh toán</a>
                 </div>
             </div>
 

@@ -1,6 +1,5 @@
 ﻿@{
-    var cartItemCount = ViewBag.CartItemCount ?? 0;
-    var cartPrice = ViewBag.CartPrice ?? 0;
+    
 }
 <!DOCTYPE html>
 <html lang="zxx">
@@ -107,11 +106,14 @@
                     <div class="header__cart">
                         <ul>
                             <li><a asp-action="Index" asp-controller="Like"><i class='bx bxs-heart-circle'></i><span>1</span></a></li>
-                            <li><a asp-action="Cart" asp-controller="ShoppingCart"><i class='bx bxs-shopping-bag'></i><span class="checkout_items" id="checkout_items">@cartItemCount</span></a></li>
+                            <li><a asp-action="Index" asp-controller="Cart"><i class='bx bxs-shopping-bag'></i><span class="checkout_items" id="cartItemCount">@ViewBag.CartItemCount</span></a></li>
+
                         </ul>
                         <div class="header__cart__price">
-                            Tổng tiền: <span id="cartTotal">@cartPrice.ToString("N0") Đ</span>
-                        </div
+                            Tổng tiền: <span id="totalAmount">
+                                @(ViewBag.TotalAmount != null ? ViewBag.TotalAmount.ToString("N0") : "0") Đ
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,7 +190,9 @@
     <!-- Footer Section End -->
     <!-- Js Plugins -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>z
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/jsshopping.js"></script>
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
