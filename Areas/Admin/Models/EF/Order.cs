@@ -31,6 +31,7 @@ namespace WebsiteTMDT.Areas.Admin.Models.EF
         public decimal TotalAmount { get; set; }
         public int Quality { get; set; }
         public int TypePayment { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public bool ShippingStatus { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

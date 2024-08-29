@@ -48,6 +48,11 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseEndpoints(endpoints =>
 {
+    app.MapControllerRoute(
+    name: "Category",
+    pattern: "danh-muc/{categoryAlias}",
+    defaults: new { controller = "Shop", action = "Index" }
+);
     endpoints.MapControllerRoute(
         name: "gioHang",
         pattern: "gio-hang",

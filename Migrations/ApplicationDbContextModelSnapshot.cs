@@ -471,6 +471,9 @@ namespace WebsiteTMDT.Migrations
                     b.Property<int>("Quality")
                         .HasColumnType("int");
 
+                    b.Property<bool>("ShippingStatus")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 

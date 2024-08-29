@@ -213,3 +213,29 @@
         </div>
     </div>
 </section>
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+<script>
+     document.querySelector('form').addEventListener('submit', function (event) {
+         var inputs = document.querySelectorAll('input, select');
+         var isValid = true;
+
+         inputs.forEach(function (input) {
+             if (input.required && !input.value.trim()) {
+                 isValid = false;
+                 input.classList.add('is-invalid');
+                 // Bạn có thể thêm thông báo lỗi tại đây nếu muốn
+             } else {
+                 input.classList.remove('is-invalid');
+             }
+         });
+
+         if (!isValid) {
+             event.preventDefault(); // Ngăn chặn việc gửi form
+             alert('Vui lòng điền đầy đủ thông tin.');
+         }
+     });
+</script>

@@ -4,7 +4,14 @@
 
 <section class="order-confirmation spad">
     <div class="container">
-        <h4>Cảm ơn bạn đã đặt hàng!</h4>
-        <p>Đơn hàng của bạn đã được ghi nhận và đang chờ xử lý. Chúng tôi sẽ liên hệ với bạn sớm nhất có thể.</p>
+        <h2>Đặt hàng thành công!</h2>
+        @if (TempData["OrderCode"] != null)
+        {
+            <p>Mã đơn hàng của bạn là: <strong>@TempData["OrderCode"]</strong></p>
+        }
+        else
+        {
+            <p>Không tìm thấy mã đơn hàng. Vui lòng kiểm tra lại.</p>
+        }
     </div>
 </section>

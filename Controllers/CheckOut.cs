@@ -30,6 +30,11 @@ namespace WebsiteTMDT.Controllers
             return View(viewModel);
         }
 
+        private string GenerateOrderCode()
+        {
+            // Mã đơn hàng bắt đầu với "DH" + thời gian hiện tại + một số ngẫu nhiên từ 1000 đến 9999
+            return "DH" + DateTime.Now.ToString("yyyyMMddHHmmss") + new Random().Next(1000, 9999);
+        }
 
 
 
@@ -53,6 +58,10 @@ namespace WebsiteTMDT.Controllers
             var order = model.Order;
 
             // Tạo đơn hàng
+            order.CreateDate = DateTime.Now;
+            order.ModifierDate = DateTime.Now;
+            order.Code = GenerateOrderCode();
+            order.ShippingStatus = false;
             order.TotalAmount = cart.Sum(c => c.Price * c.Quantity);
             order.Quality = cart.Sum(c => c.Quantity);
             order.OrderDetails = cart.Select(c => new OrderDetail
@@ -65,6 +74,7 @@ namespace WebsiteTMDT.Controllers
             _context.Orders.Add(order);
             _context.SaveChanges();
 
+            TempData["OrderCode"] = order.Code;
             // Xóa giỏ hàng sau khi đặt hàng thành công
             HttpContext.Session.Remove("Cart");
 
@@ -73,8 +83,9 @@ namespace WebsiteTMDT.Controllers
 
 
         // GET: /Checkout/OrderConfirmation
-        public IActionResult OrderConfirmation()
+        public IActionResult OrderConfirmation(string orderCode)
         {
+            ViewBag.OrderCode = orderCode;
             return View();
         }
     }
