@@ -56,11 +56,40 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
             var viewModel = new OrderViewCheckOut
             {
                 Order = order,
-                orderDetails = orderDetails
+                orderDetails = order.OrderDetails.ToList()
             };
 
             // Trả về view với ViewModel
             return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult UpdateShippingStatus(int orderId, bool shippingStatus)
+        {
+            // Kiểm tra giá trị nhận được
+            Console.WriteLine($"OrderId: {orderId}, ShippingStatus: {shippingStatus}");
+
+            var order = _db.Orders.Find(orderId);
+            if (order == null)
+            {
+                return NotFound(); // Nếu không tìm thấy đơn hàng
+            }
+
+            // Cập nhật trạng thái giao hàng
+            order.ShippingStatus = shippingStatus;
+
+            try
+            {
+                _db.Orders.Update(order); // Đánh dấu order là đã được cập nhật
+                _db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu có
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "Có lỗi xảy ra khi cập nhật trạng thái giao hàng.");
+            }
+
+            return RedirectToAction("Index");
         }
 
     }

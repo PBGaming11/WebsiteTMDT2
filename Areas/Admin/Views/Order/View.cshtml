@@ -64,12 +64,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <form action="/Admin/Order/UpdateShippingStatus" method="post">
+                        <input type="hidden" name="orderId" value="@Model.Order.Id" />
                         <div class="form-group">
-                            <label>Trang Thái</label>
-                            <p class="form-control">@(Model.Order.ShippingStatus == false ? "Chưa Thanh Toán" : "Đã Thanh Toán")</p>
+                            <label>Trạng thái giao hàng</label>
+                            <select name="ShippingStatus" class="form-control">
+                                <option value="false" @(Model.Order.ShippingStatus == false ? "selected" : "")>Chưa giao</option>
+                                <option value="true" @(Model.Order.ShippingStatus == true ? "selected" : "")>Đã giao</option>
+                            </select>
                         </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary mt-2">Cập nhật</button>
+                    </form>
+
                 </div>
                 <div class="row">
                     <div class="col-md-12">

@@ -153,5 +153,37 @@ namespace WebsiteTMDT.Controllers
 
             return Json(new { success = true, totalAmount = totalAmount, cartItemCount = cartItemCount });
         }
+        //chức năng mua ngay
+        [HttpPost]
+        public IActionResult BuyNow(int productId)
+        {
+            var product = _db.Products.Find(productId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // Sử dụng giá giảm nếu có, nếu không sử dụng giá gốc
+            var price = product.PriceSale.HasValue ? product.PriceSale.Value : product.Price;
+
+            // Logic thêm sản phẩm vào giỏ hàng
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            var cartItem = cart.FirstOrDefault(c => c.ProductId == productId);
+            if (cartItem == null)
+            {
+                cart.Add(new CartItem { ProductId = productId, Quantity = 1, Price = price ,ProductName = product.Title, ImageUrl = product.Image, Issale = product.IsSale});
+            }
+            else
+            {
+                cartItem.Quantity++;
+            }
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+
+            // Chuyển đến trang thanh toán
+            return RedirectToAction("Index", "CheckOut");
+        }
+
     }
 }

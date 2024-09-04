@@ -114,7 +114,10 @@
                         </div>
                         <div class="buttons">
                             <a href="#" data-id="@Model.Id" id="addToCartButton" class="cart-btn cart"><i class='bx bx-cart'></i>Cho vào giỏ hàng</a>
-                            <a href="#" class="buy-now-btn cart">Mua ngay</a>
+                            <form asp-controller="Cart" asp-action="BuyNow" method="post" class="buy-now-form">
+                                <input type="hidden" name="productId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-primary buy-now-btn">Mua ngay</button>
+                            </form>
                         </div>
                     </div>
                     <div class="product__details__widget">
@@ -208,6 +211,7 @@
             </div>
             @foreach (var product in ViewBag.RelatedProducts as List<WebsiteTMDT.Areas.Admin.Models.EF.Product>)
             {
+                <a href="/@product.Alias-p@(product.Id)">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic">
@@ -221,7 +225,7 @@
                             <img src="data:image/png;base64,@product.Image" alt="">
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">@product.Title</a></h6>
+                            <h6><a href="/@product.Alias-p@(product.Id)">@product.Title</a></h6>
                             <div class="rating">
                                 <i class='bx bxs-star'></i>
                                 <i class='bx bxs-star'></i>
@@ -241,6 +245,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
             }
             </div>
         </div>
