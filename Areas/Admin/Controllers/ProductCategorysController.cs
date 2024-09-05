@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebsiteTMDT.Areas.Admin.Models.EF;
 using WebsiteTMDT.Data;
 
 namespace WebsiteTMDT.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")] // Chỉ Admin mới được truy cập
     public class ProductCategorysController : Controller
     {
         private readonly ApplicationDbContext _db;

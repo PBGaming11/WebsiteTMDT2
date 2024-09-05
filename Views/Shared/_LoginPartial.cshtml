@@ -1,59 +1,84 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@if (!User.Identity.IsAuthenticated || User.IsInRole("User"))
+{
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <style>
+                .nav-item a:hover {
+                    color: #DC0000;
+                }
+            </style>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Chào @User.Identity?.Name</a>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-dark">Đăng xuất</button>
+                </form>
+            </li>
 
-<ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <style>
-            .nav-item a:hover {
-                color: #DC0000;
-            }
-        </style>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Chào @User.Identity?.Name</a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Đăng xuất</button>
-            </form>
-        </li>
+        }
+        else
+        {
+            <style>
 
-    }
-    else
-    {
-        <style>
-
-            .header__top__right__auth a {
-                font-size: 15px;
-                color: #0000000;
-                font-weight: 800;
-                text-transform: uppercase;
-                display: inline-block;
-                padding: 13px 30px 12px;
-                background: #fffff;
-                border: none;
-                border-radius: 20px;
-                transition: background 0.1s, color 0.3s, transform 0.3s;
-                font-family: 'Times New Roman', Times, serif;
-            }
-
-                .header__top__right__auth a:hover {
-                    transform: translateX(5px);
-                    background: #DD0000;
-                    color: #ffff;
+                .header__top__right__auth a {
+                    font-size: 15px;
+                    color: #0000000;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    display: inline-block;
+                    padding: 13px 30px 12px;
+                    background: #fffff;
+                    border: none;
+                    border-radius: 20px;
+                    transition: background 0.1s, color 0.3s, transform 0.3s;
+                    font-family: 'Times New Roman', Times, serif;
                 }
 
-                .header__top__right__auth a.active {
-                    background: #DD0000;
-                    color: #ffffff;
-                }
-        </style>
-        <li class="humberger__menu__widget header__top__right__auth">
-            <a asp-area="Identity" asp-page="/Account/Register" class="navbar-nav @(ViewContext.RouteData.Values["page"]?.ToString() == "/Account/Register" ? "active" : "")">Đăng Ký</a>
-            <a asp-area="Identity" asp-page="/Account/Login" class="navbar-nav @(ViewContext.RouteData.Values["page"]?.ToString() == "/Account/Login" ? "active" : "")">Đăng Nhập</a>
-        </li>
+                    .header__top__right__auth a:hover {
+                        transform: translateX(5px);
+                        background: #DD0000;
+                        color: #ffff;
+                    }
+
+                    .header__top__right__auth a.active {
+                        background: #DD0000;
+                        color: #ffffff;
+                    }
+            </style>
+            <li class="humberger__menu__widget header__top__right__auth">
+                <a asp-area="Identity" asp-page="/Account/Register" class="navbar-nav @(ViewContext.RouteData.Values["page"]?.ToString() == "/Account/Register" ? "active" : "")">Đăng Ký</a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="navbar-nav @(ViewContext.RouteData.Values["page"]?.ToString() == "/Account/Login" ? "active" : "")">Đăng Nhập</a>
+            </li>
 
 
-    }
-</ul>
+        }
+    </ul>
+}else
+{
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item">
+
+            </li>
+            <li class="nav-item">
+
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+        }
+    </ul>
+}
+

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebsiteTMDT.Areas.Admin.Models;
 using WebsiteTMDT.Areas.Admin.Models.EF;
@@ -8,6 +9,7 @@ using X.PagedList.Extensions;
 namespace WebsiteTMDT.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")] // Chỉ Admin mới được truy cập
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext _db;

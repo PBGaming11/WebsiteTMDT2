@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using WebsiteTMDT.Data;
-using WebsiteTMDT.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Password.RequireUppercase = false)
+    .AddDefaultTokenProviders().AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews()
@@ -23,6 +23,11 @@ builder.Services.AddControllersWithViews()
                 });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("SellerOnly", policy => policy.RequireRole("Seller"));
+});
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -48,33 +53,21 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseEndpoints(endpoints =>
 {
-    app.MapControllerRoute(
-    name: "Category",
-    pattern: "danh-muc/{categoryAlias}",
-    defaults: new { controller = "Shop", action = "Index" }
-);
     endpoints.MapControllerRoute(
-        name: "gioHang",
-        pattern: "gio-hang",
-        defaults: new { controller = "Cart", action = "Index" });
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}",
+        defaults: new { area = "User", controller = "Home", action = "Index" }); // cho chuyen trang User/Home/Index
 
     endpoints.MapControllerRoute(
-        name: "thanhtoan",
-        pattern: "thanh-toan",
-        defaults: new { controller = "CheckOut", action = "Index" });
-
-    endpoints.MapControllerRoute(
-        name: "porudctDetail",
-        pattern: "{alias}-p{id}",
-        defaults: new { controller = "productdetails", action = "Index" });
+        name: "admin_default",
+        pattern: "Admin/{action=Index}/{id?}",
+        defaults: new { area = "Admin", controller = "Admin", action = "Index" });
+    endpoints.MapRazorPages();
 });
+    
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "areas",
-    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

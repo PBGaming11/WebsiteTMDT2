@@ -1,0 +1,176 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<style>
+    .bodys {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containeras {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 20px;
+    text-align: center;
+}
+
+.login-text {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.identifys-form {
+    margin-top: 20px;
+}
+
+.form-floating {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-controls {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-controls:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        outline: none;
+    }
+
+.form-label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 16px;
+    color: #777;
+    transition: all 0.2s ease-out;
+    background-color: #fff;
+    padding: 0 5px;
+}
+
+.form-controls:focus ~ .form-label,
+.form-controls:not(:placeholder-shown).form-controls:not(:focus) ~ .form-label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #007bff;
+}
+
+.text-dangers {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.form-check {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+#login-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    #login-submit:hover {
+        background-color: #0056b3;
+        box-shadow: 0 4px 8px rgba(0, 91, 179, 0.3);
+    }
+
+.nest {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+    .nest a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .nest a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+hr {
+    margin-bottom: 40px;
+}
+</style>
+<div class="bodys">
+    <div class="containeras">
+        <h3 class="login-text">@ViewData["Title"]</h3>
+        <div class="identifys-form">
+            <form id="account" method="post">
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-dangers"></div>
+                <div class="form-floating">
+                    <label class="font-weight-bold">Tên đăng nhập</label>
+                    <span asp-validation-for="Input.Username" class="text-dangers"></span>
+                    <input asp-for="Input.Username" class="form-controls" autocomplete="username" aria-required="true" />
+                </div>
+                <div class="form-floating">
+                    <label class="font-weight-bold">Mật khẩu</label>
+                    <input asp-for="Input.Password" class="form-controls" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" asp-for="Input.RememberMe" />
+                    <label class="form-check-label" asp-for="Input.RememberMe">
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <button id="registerSubmit" type="submit" class="btn btn-primary">Đăng nhập</button>
+                <div>
+                    <p class="nest">
+                        <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu?</a>
+                    </p>
+                    <p class="nest">
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Đăng ký</a>
+                    </p>
+                    <p class="nest">
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Gửi lại xác minh email</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

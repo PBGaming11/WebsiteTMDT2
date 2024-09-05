@@ -1,0 +1,106 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+<style>
+ .body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.containers {
+    margin-top: 50px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.card-title {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+#registerSubmit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px; /* Increased padding for better touch interaction */
+    cursor: pointer;
+    border-radius: 4px;
+    align-items: center;
+}
+
+    #registerSubmit:hover {
+        background-color: #0056b3;
+    }
+
+.card-body {
+    padding: 40px;
+}
+
+</style>
+<div class="body d-flex justify-content-center align-items-center">
+    <div class="containers">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-center">@ViewData["Title"]</h3>
+                <hr />
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label for="username" class="font-weight-bold">Tên đăng nhập</label>
+                        <input asp-for="Input.Username" class="form-control" id="username" type="text" aria-describedby="usernameHelp" placeholder="Nhập tên đăng nhập của bạn" />
+                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="font-weight-bold">Email</label>
+                        <input asp-for="Input.Email" class="form-control" id="email" type="email" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email của bạn" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="font-weight-bold">Mật khẩu</label>
+                        <input asp-for="Input.Password" class="form-control" id="password" type="password" aria-describedby="passwordHelp" placeholder="Nhập mật khẩu" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        <small id="passwordHelp" class="form-text text-muted">Mật khẩu cần có ít nhất 8 ký tự.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword" class="font-weight-bold">Xác nhận mật khẩu</label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" id="confirmPassword" type="password" aria-describedby="confirmPasswordHelp" placeholder="Nhập lại mật khẩu" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="role" class="font-weight-bold">Chọn role</label>
+                        <br />
+                        <select asp-for="Input.role" asp-items="@Model.Input.RoleList">
+                            <option disabled selected>Chọn role</option>
+                        </select>
+                    </div>
+                    <br />
+                    <br />
+                    <button id="registerSubmit" type="submit" class="btn btn-primary">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

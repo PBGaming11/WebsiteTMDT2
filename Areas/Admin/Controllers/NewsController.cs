@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebsiteTMDT.Areas.Admin.Models.EF;
 using WebsiteTMDT.Data;
@@ -7,6 +8,7 @@ using X.PagedList.Extensions;
 namespace WebsiteTMDT.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")] // Chỉ Admin mới được truy cập
     public class NewsController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -37,7 +39,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
 
             return View(pagedItems);
         }
-        public ActionResult Add()
+        /*public ActionResult Add()
         {
             return View();
         }
@@ -57,8 +59,8 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
             _db.News.Add(model);
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }
-        public ActionResult Edit(int id)
+        }*/
+        /*public ActionResult Edit(int id)
         {
             var item = _db.News.Find(id);
             return View(item);
@@ -78,7 +80,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
             _db.Entry(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
         [HttpPost]
         public IActionResult Delete(int id)
         {

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebsiteTMDT.Areas.Admin.Models.EF;
-using WebsiteTMDT.Controllers;
 using WebsiteTMDT.Data;
 using X.PagedList.Extensions;
 
@@ -48,7 +47,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
 
             return View(pagedItems);
         }
-        public IActionResult Add()
+        /*public IActionResult Add()
         {
             ViewBag.ProductCategory = new SelectList(_db.ProductCategories.ToList(), "Id", "Title");
             return View();
@@ -148,7 +147,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
 
             // Return the view with the model to display validation errors
             return View(model);
-        }
+        }*/
 
         [HttpPost]
         public IActionResult Delete(int id)

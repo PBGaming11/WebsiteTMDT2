@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebsiteTMDT.Areas.Admin.Models.EF;
 using WebsiteTMDT.Data;
@@ -6,6 +7,7 @@ using WebsiteTMDT.Data;
 namespace WebsiteTMDT.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")] // Chỉ Admin mới được truy cập
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;

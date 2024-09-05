@@ -66,8 +66,21 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><a asp-controller="Admin" asp-action="Index">Kênh người bán</a></li>
-                                <li style="margin-left:20px;"><a href="#">Trở thành người bán</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a asp-area="Admin" asp-controller="Admin" asp-action="Index">Quản lý wedsite</a></li>
+                                }
+                                @if (User.IsInRole("Seller"))
+                                {
+                                    <li><a asp-area="Seller" asp-controller="Seller" asp-action="Index">Quản lý cửa hàng</a></li>
+                                }
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li style="margin-left:20px;">
+                                        <a asp-area="Identity" asp-page="/Account/Register">Trở thành người bán</a>
+                                    </li>
+                                }
+
                             </ul>
                         </div>
                     </div>

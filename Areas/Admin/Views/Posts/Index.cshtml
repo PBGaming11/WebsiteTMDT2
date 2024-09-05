@@ -45,7 +45,7 @@
             <h3 class="card-title">@ViewBag.Title</h3>
 
             <div class="card-tools">
-                <a href="~/Admin/Posts/Add" class="btn btn-primary">Thêm mới</a>
+                @* <a href="~/Admin/Posts/Add" class="btn btn-primary">Thêm mới</a> *@
                 <a href="#" class="btn btn-danger" id="btnDeleteAll">Xóa</a>
             </div>
         </div>
@@ -100,7 +100,7 @@
                                     <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/Admin/Posts/Edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
+                                    @* <a href="/Admin/Posts/Edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a> *@
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                 </td>
 

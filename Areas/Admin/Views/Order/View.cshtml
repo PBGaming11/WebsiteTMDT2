@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Chi tiết đơn hàng";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var isNotShipped = !Model.Order.ShippingStatus;
+    var isShipped = Model.Order.ShippingStatus;
 }
 @model WebsiteTMDT.Areas.Admin.Models.OrderViewCheckOut
 @section naviheader {
@@ -69,8 +71,8 @@
                         <div class="form-group">
                             <label>Trạng thái giao hàng</label>
                             <select name="ShippingStatus" class="form-control">
-                                <option value="false" @(Model.Order.ShippingStatus == false ? "selected" : "")>Chưa giao</option>
-                                <option value="true" @(Model.Order.ShippingStatus == true ? "selected" : "")>Đã giao</option>
+                                <option value="false" selected="@isNotShipped">Chưa giao</option>
+                                <option value="true" selected="@isShipped">Đã giao</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary mt-2">Cập nhật</button>
