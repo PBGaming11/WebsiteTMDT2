@@ -91,7 +91,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
                 return StatusCode(500, "Có lỗi xảy ra khi cập nhật trạng thái giao hàng.");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Order", new { area = "Admin" });
         }
 
     }

@@ -53,18 +53,46 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}",
-        defaults: new { area = "User", controller = "Home", action = "Index" }); // cho chuyen trang User/Home/Index
-
+    // Routing cho các area
     endpoints.MapControllerRoute(
         name: "admin_default",
-        pattern: "Admin/{action=Index}/{id?}",
-        defaults: new { area = "Admin", controller = "Admin", action = "Index" });
+        pattern: "Admin/{controller=Admin}/{action=Index}/{id?}",
+        defaults: new { area = "Admin" });
+    endpoints.MapControllerRoute(
+        name: "seller_default",
+        pattern: "Seller/{controller=Home}/{action=Index}/{id?}",
+        defaults: new { area = "Seller" });
+
+    endpoints.MapControllerRoute(
+        name: "user_default",
+        pattern: "{controller=Home}/{action=Index}/{id?}",
+        defaults: new { area = "User" });
+
+
+    endpoints.MapControllerRoute(
+        name: "category",
+        pattern: "danh-muc/{categoryAlias}",
+        defaults: new { area = "User", controller = "Shop", action = "Index" });
+
+    endpoints.MapControllerRoute(
+        name: "productDetail",
+        pattern: "{alias}-p{id}",
+        defaults: new { area = "User", controller = "ProductDetails", action = "Index" });
+
+    endpoints.MapControllerRoute(
+        name: "gioHang",
+        pattern: "gio-hang",
+        defaults: new { area = "User", controller = "Cart", action = "Index" });
+
+    endpoints.MapControllerRoute(
+        name: "thanhtoan",
+        pattern: "thanh-toan",
+        defaults: new { area = "User", controller = "CheckOut", action = "Index" });
+
     endpoints.MapRazorPages();
 });
-    
+
+
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "areas",

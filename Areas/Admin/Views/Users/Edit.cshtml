@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model WebsiteTMDT.Areas.Admin.Models.EF.EditUserViewModel
+
+<h2>Edit User</h2>
+
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { area = "Admin" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label asp-for="User.UserName"></label>
+        <input asp-for="User.UserName" class="form-control" />
+        <span asp-validation-for="User.UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="User.Email"></label>
+        <input asp-for="User.Email" class="form-control" />
+        <span asp-validation-for="User.Email" class="text-danger"></span>
+    </div>
+
+    <h4>Roles</h4>
+    @foreach (var role in Model.AllRoles)
+    {
+        <div>
+            <input type="checkbox" name="SelectedRoles" value="@role.Name" @(Model.Roles.Contains(role.Name) ? "checked" : "") />
+            <label>@role.Name</label>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}

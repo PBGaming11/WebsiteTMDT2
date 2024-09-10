@@ -101,7 +101,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
             }
             _db.Products.Add(model);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Products", new { area = "Admin" });
         }
         public IActionResult Edit(int id)
         {
@@ -139,7 +139,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
                 _db.SaveChanges();
 
                 // Redirect to Index if the update is successful
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Products", new { area = "Admin" });
             }
 
             // If the ModelState is invalid, re-populate the ViewBag.ProductCategoryList

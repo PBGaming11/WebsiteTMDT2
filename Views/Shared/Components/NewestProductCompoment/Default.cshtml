@@ -2,7 +2,7 @@
 @foreach (var item in Model)
 {
     <div class="latest-product__slider__item">
-        <a href="@Url.Action("Index", "productdetails", new { id = item.Id })" class="latest-product__item">
+        <a href="/@item.Alias-p@(item.Id)" class="latest-product__item">
             <div class="latest-product__item__pic">
                 <img src="data:image/png;base64,@item.Image" alt="">
             </div>

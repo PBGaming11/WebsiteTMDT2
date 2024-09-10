@@ -6,7 +6,7 @@
             <ul>
                 @foreach (var item in Model)
                 {
-                    <li><a href="@Url.Action("Index", "Shop", new { categoryAlias = item.Alias })">@item.Title</a></li>
+                    <li><a href="@Url.RouteUrl("Category", new { categoryAlias = item.Alias })">@item.Title</a></li>
                 }
             </ul>
         </div>

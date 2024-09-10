@@ -58,7 +58,7 @@ namespace WebsiteTMDT.Areas.Seller.Controllers
             model.Alias = WebsiteTMDT.Areas.Admin.Models.Common.Filter.FilterChar(model.Title);
             _db.News.Add(model);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "News", new { area = "Seller" });
         }
         public ActionResult Edit(int id)
         {
@@ -79,7 +79,7 @@ namespace WebsiteTMDT.Areas.Seller.Controllers
             _db.News.Attach(model);
             _db.Entry(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "News", new { area = "Seller" });
         }
         [HttpPost]
         public IActionResult Delete(int id)

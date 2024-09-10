@@ -9,17 +9,69 @@
     }
 }
 
-<h1>Manage your account</h1>
+<style>
+    h1 {
+        font-size: 50px;
+        font-weight: 700;
+        text-align: center;
+    }
 
-<div>
-    <h2>Change your account settings</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
+    .bo {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .form-floatingr {
+        margin-bottom: 1rem;
+    }
+
+    .form-labels {
+        font-weight: bold;
+    }
+
+    #update-profile-button {
+        margin-top: 1rem;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+        border-radius: 0.3rem;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .col-md-6 {
+        max-width: 500px;
+    }
+
+    .tos {
+        text-align: center;
+    }
+</style>
+<div class="container bo">
+    <h1>Tài khoản cái nhân</h1>
+
+    <div>
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
         </div>
     </div>
 </div>

@@ -58,7 +58,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
             model.Alias = WebsiteTMDT.Areas.Admin.Models.Common.Filter.FilterChar(model.Title);
             _db.News.Add(model);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "News", new { area = "Admin" });
         }*/
         /*public ActionResult Edit(int id)
         {
@@ -79,7 +79,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
             _db.News.Attach(model);
             _db.Entry(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+           return RedirectToAction("Index", "News", new { area = "Admin" });
         }*/
         [HttpPost]
         public IActionResult Delete(int id)

@@ -14,10 +14,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/Admin" class="nav-link">Home</a>
+            <a href="/Seller" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="../Admin/News" class="nav-link">@ViewBag.Title</a>
+            <a href="../Seller/News" class="nav-link">@ViewBag.Title</a>
         </li>
     </ul>
 }
@@ -47,7 +47,7 @@
             <h3 class="card-title">Thêm mới danh sách @ViewBag.Title</h3>
 
             <div class="card-tools">
-                <a href="~/Admin/News/Add" class="btn btn-primary">Thêm mới</a>
+                <a href="~/Seller/News/Add" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="btnDeleteAll">Xóa</a>
             </div>
         </div>
@@ -103,7 +103,7 @@
                                     <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
                                 <td>
-                                    <a href="/Admin/News/Edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="/Seller/News/Edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                 </td>
 
@@ -162,7 +162,7 @@
                 var conf = confirm('Bạn có muốn xóa hay không?')
                 if (conf == true) {
                     $.ajax({
-                        url: '/Admin/News/DeleteAll',
+                        url: '/Seller/News/DeleteAll',
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {
@@ -195,7 +195,7 @@
                 var conf = confirm('Bạn có muốn xóa không ?');
                 if (conf == true) {
                     $.ajax({
-                        url: '/Admin/News/Delete',
+                        url: '/Seller/News/Delete',
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {
@@ -213,7 +213,7 @@
                 var btn = $(this);
                 var id = btn.data("id");
                 $.ajax({
-                    url: '/Admin/News/IsActive',
+                    url: '/Seller/News/IsActive',
                     type: 'POST',
                     data: { id: id },
                     success: function (rs) {

@@ -89,7 +89,7 @@
                         <li>Tổng tiền <span id="totalAmounts">@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</span></li>
                     </ul>
                     </ul>
-                    <a asp-action="Index" asp-controller="Checkout" class="primary-btn">Thanh toán</a>
+                    <a href="@Url.RouteUrl("thanhtoan")" class="primary-btn">Thanh toán</a>
                 </div>
             </div>
 

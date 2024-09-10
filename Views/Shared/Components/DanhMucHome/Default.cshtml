@@ -3,7 +3,7 @@
     @foreach (var item in Model)
     {
         <div class="col-lg-3">
-            <a href="@Url.Action("Index", "Shop", new { categoryAlias = item.Alias })">
+            <a href="@Url.RouteUrl("Category", new { categoryAlias = item.Alias })">
                 <div class="categories__item">
                     <img src="data:image/png;base64,@item.Icon" />
                     <h5>@item.Title</h5>

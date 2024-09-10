@@ -70,7 +70,7 @@ namespace WebsiteTMDT.Areas.Admin.Controllers
             _db.Entry(model).Property(x => x.Position).IsModified = true;
             _db.Entry(model).Property(x => x.ModifierBy).IsModified = true;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Category", new { area = "Admin" });
         }
         [HttpPost]
         public IActionResult Delete(int id)
