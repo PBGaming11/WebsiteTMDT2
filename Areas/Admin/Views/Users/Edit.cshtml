@@ -1,36 +1,133 @@
 ﻿@{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Chỉnh sửa tài khoản";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 @model WebsiteTMDT.Areas.Admin.Models.EF.EditUserViewModel
-
-<h2>Edit User</h2>
-
-@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { area = "Admin" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        <label asp-for="User.UserName"></label>
-        <input asp-for="User.UserName" class="form-control" />
-        <span asp-validation-for="User.UserName" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="User.Email"></label>
-        <input asp-for="User.Email" class="form-control" />
-        <span asp-validation-for="User.Email" class="text-danger"></span>
-    </div>
-
-    <h4>Roles</h4>
-    @foreach (var role in Model.AllRoles)
-    {
-        <div>
-            <input type="checkbox" name="SelectedRoles" value="@role.Name" @(Model.Roles.Contains(role.Name) ? "checked" : "") />
-            <label>@role.Name</label>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@section naviheader {
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/Admin" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="../Admin/AccountManager" class="nav-link">Tài khoản</a>
+        </li>
+    </ul>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Chỉnh sửa tài khoản @Model.User</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Tài khoản người dùng</li>
+                </ol>
+            </div>
         </div>
-    }
+    </div><!-- /.container-fluid -->
+</section>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Chỉnh sửa tài khoản</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { area = "Admin" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x => x.User.Id)
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" value="@Model.User.UserName" disabled />
+                </div>
+
+                <div class="form-group">
+                    <label>Email hiện tại</label>
+                    <input type="text" class="form-control" value="@Model.User.Email" disabled />
+                </div>
+
+                <div class="form-group">
+                    <label>Email mới (nếu muốn thay đổi)</label>
+                    <input asp-for="User.Email" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="changePasswordCheckbox" onclick="toggleChangePassword()" />
+                    <label for="changePasswordCheckbox">Đổi mật khẩu</label>
+                </div>
+
+                <!-- Trường mật khẩu mới sẽ được ẩn khi trang load -->
+                <div id="changePasswordFields" style="display: none;">
+                    <div class="form-group">
+                        <label>Mật khẩu mới</label>
+                        <div class="input-group">
+                            <input asp-for="NewPassword" class="form-control" id="newPassword" type="password" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" onclick="toggleNewPassword()">Hiển thị</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select asp-for="CurrentRole" asp-items="Model.AllRoles" class="form-control">
+                        <option value="" disabled>Chọn role</option>
+                    </select>
+                </div>
+                <input type="hidden" asp-for="User.Id" />
+                <button type="submit" class="btn btn-success">Lưu thay đổi</button>
+            }
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+@section Scripts {
+    <script type="text/javascript">
+        // Hàm hiển thị/ẩn trường đổi mật khẩu dựa trên checkbox
+        function toggleChangePassword() {
+            var checkbox = document.getElementById("changePasswordCheckbox");
+            var passwordFields = document.getElementById("changePasswordFields");
+
+            if (checkbox.checked) {
+                passwordFields.style.display = "block";
+            } else {
+                passwordFields.style.display = "none";
+            }
+        }
+        // Hàm ẩn/hiện mật khẩu khi nhấn nút "Hiển thị"
+        function toggleNewPassword() {
+            var passwordField = document.getElementById("newPassword");
+            var toggleButton = document.querySelector(".input-group-append button");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.textContent = "Ẩn";
+            } else {
+                passwordField.type = "password";
+                toggleButton.textContent = "Hiển thị";
+            }
+        }
+    </script>
 }
