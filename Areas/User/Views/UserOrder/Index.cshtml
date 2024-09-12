@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model X.PagedList.IPagedList<WebsiteTMDT.Areas.Admin.Models.EF.Order>
+@using X.PagedList;
+@using X.Web.PagedList
+
+<div class="container">
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Mã đơn hàng</th>
+            <th>Tên khách hàng</th>
+            <th>SĐT</th>
+            <th>Tổng tiền</th>
+            <th>Ngày tạo</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Code</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.Phone</td>
+                    <td class="price-displaya">@item.TotalAmount</td>
+                    <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
+                    <td>@(item.ShippingStatus == false ? "Chưa giao hàng" : "Đã đã giao hàng")</td>
+                    <td>
+                        <a href="/User/UserOrder/View/@item.Id" class="btn btn-success">Xem</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12 text-right">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const prices = document.querySelectorAll('.price-displaya');
+        prices.forEach(price => {
+            let priceText = price.textContent.trim();
+            let priceValue = parseInt(priceText.replace(/\D/g, '')); // Remove any non-digit characters
+
+            if (priceValue >= 1000000) {
+                // Format as x.000.000
+                let millions = Math.floor(priceValue / 1000000);
+                let thousands = Math.floor((priceValue % 1000000) / 1000);
+                price.textContent = `${millions}.${thousands.toString().padStart(3, '0')}.000 đ`;
+            } else {
+                // Format as x.000
+                let thousands = priceValue / 1000;
+                price.textContent = `${thousands.toFixed(3).replace('.', '.')} đ`;
+            }
+        });
+    });
+</script>

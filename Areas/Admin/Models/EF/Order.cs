@@ -28,7 +28,7 @@ namespace WebsiteTMDT.Areas.Admin.Models.EF
         [Required(ErrorMessage = "Email không được để trống.")]
         [EmailAddress(ErrorMessage = "Email không hợp lệ.")]
         public string Email { get; set; }
-        public decimal TotalAmount { get; set; }
+        public int TotalAmount { get; set; }
         public int Quality { get; set; }
         public int TypePayment { get; set; }
         public bool ShippingStatus { get; set; }

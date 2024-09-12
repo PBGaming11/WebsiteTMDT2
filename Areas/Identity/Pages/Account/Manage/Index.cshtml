@@ -1,10 +1,66 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Trang cá nhân";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
+<style>
+    /* Định dạng form */
+#profile-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+/* Căn chỉnh các trường trong form */
+.form-floating {
+    margin-bottom: 15px;
+}
+
+/* Định dạng nhãn và input */
+.form-floating input {
+    height: 50px;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.form-floating label {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* Định dạng nút lưu */
+#update-profile-button {
+    background-color: #007bff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+#update-profile-button:hover {
+    background-color: #0056b3;
+}
+
+/* Định dạng lỗi */
+.text-danger {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Định dạng cho cột form */
+.col-md-6 {
+    margin: 0 auto;
+    max-width: 500px;
+}
+h3{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+</style>
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
@@ -12,12 +68,12 @@
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for="Username" class="form-control" disabled />
                 <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Username" class="form-control" disabled />
             </div>
             <div class="form-floating">
-                <input asp-for="Input.PhoneNumber" class="form-control" />
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>

@@ -50,7 +50,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Tiền tổng</label>
-                        <p class="form-control">@Model.Order.TotalAmount</p>
+                        <p class="form-control price-displaya">@Model.Order.TotalAmount</p>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -98,3 +98,23 @@
 
 </section>
 <!-- /.content -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const prices = document.querySelectorAll('.price-displaya');
+        prices.forEach(price => {
+            let priceText = price.textContent.trim();
+            let priceValue = parseInt(priceText.replace(/\D/g, '')); // Remove any non-digit characters
+
+            if (priceValue >= 1000000) {
+                // Format as x.000.000
+                let millions = Math.floor(priceValue / 1000000);
+                let thousands = Math.floor((priceValue % 1000000) / 1000);
+                price.textContent = `${millions}.${thousands.toString().padStart(3, '0')}.000 đ`;
+            } else {
+                // Format as x.000
+                let thousands = priceValue / 1000;
+                price.textContent = `${thousands.toFixed(3).replace('.', '.')} đ`;
+            }
+        });
+    });
+</script>

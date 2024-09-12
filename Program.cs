@@ -67,18 +67,19 @@ app.UseEndpoints(endpoints =>
         name: "user_default",
         pattern: "{controller=Home}/{action=Index}/{id?}",
         defaults: new { area = "User" });
-
-
     endpoints.MapControllerRoute(
         name: "category",
         pattern: "danh-muc/{categoryAlias}",
         defaults: new { area = "User", controller = "Shop", action = "Index" });
-
+    endpoints.MapControllerRoute(
+       name: "order",
+       pattern: "don-hang",
+       defaults: new { area = "User", controller = "Order", action = "TrackOrder" });
     endpoints.MapControllerRoute(
         name: "productDetail",
         pattern: "{alias}-p{id}",
         defaults: new { area = "User", controller = "ProductDetails", action = "Index" });
-
+    
     endpoints.MapControllerRoute(
         name: "gioHang",
         pattern: "gio-hang",
@@ -88,6 +89,11 @@ app.UseEndpoints(endpoints =>
         name: "thanhtoan",
         pattern: "thanh-toan",
         defaults: new { area = "User", controller = "CheckOut", action = "Index" });
+   
+    endpoints.MapControllerRoute(
+       name: "news",
+       pattern: "tin-tuc",
+       defaults: new { area = "User", controller = "News", action = "Index" });
 
     endpoints.MapRazorPages();
 });

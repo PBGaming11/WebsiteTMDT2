@@ -1,0 +1,117 @@
+﻿@model WebsiteTMDT.Areas.Admin.Models.EF.New
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+<style>
+    /* Tổng thể container */
+    .news-detail-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    /* Header của bài viết */
+    .news-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .news-header h2 {
+        font-size: 36px;
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .news-header .news-date {
+        font-size: 14px;
+        color: #777;
+        font-style: italic;
+    }
+
+    /* Hình ảnh trong bài viết */
+    .news-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    /* Nội dung bài viết */
+    .news-content {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #444;
+        text-align: justify;
+    }
+
+    .news-content p {
+        margin-bottom: 20px;
+    }
+
+    /* Footer của bài viết, với các nút chia sẻ */
+    .news-footer {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .share-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-share {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-share.facebook {
+        background-color: #3b5998;
+        color: white;
+    }
+
+    .btn-share.twitter {
+        background-color: #1da1f2;
+        color: white;
+    }
+
+    .btn-share.facebook:hover {
+        background-color: #324b82;
+    }
+
+    .btn-share.twitter:hover {
+        background-color: #1991db;
+    }
+</style>
+<div class="news-detail-container">
+    <div class="news-header">
+        <h2>@Model.Title</h2>
+        <p class="news-date">Ngày đăng: @Model.CreateDate.ToString("dd/MM/yyyy")</p>
+    </div>
+
+    <div class="news-image">
+        <img src="data:image/png;base64,@Model.Image" alt="@Model.Title" />
+    </div>
+
+    <div class="news-content">
+        @Html.Raw(Model.Detail)
+    </div>
+
+    <div class="news-footer">
+        <div class="share-buttons">
+            <button class="btn-share facebook">Chia sẻ Facebook</button>
+            <button class="btn-share twitter">Chia sẻ Twitter</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,214 @@
+﻿@model X.PagedList.IPagedList<WebsiteTMDT.Areas.Admin.Models.EF.New>
+@using X.PagedList;
+@using X.Web.PagedList
+
+@{
+    ViewData["Title"] = "Tin Tức";
+}
+<style>
+    /* Container chung cho tin tức */
+    .news-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Tựa đề chính */
+    .news-container h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+        position: relative;
+        color: #333;
+        text-transform: uppercase;
+    }
+
+    .news-container h2::after {
+        content: "";
+        width: 60px;
+        height: 4px;
+        background-color: #28a745;
+        display: block;
+        margin: 10px auto 0;
+    }
+
+    /* Thiết kế từng mục tin tức */
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        grid-gap: 30px;
+    }
+
+    /* Card tin tức */
+    .news-item {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+    }
+
+    /* Hiệu ứng khi hover */
+    .news-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Hình ảnh của tin */
+    .news-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    /* Nội dung tin tức */
+    .news-content {
+        padding: 20px;
+    }
+
+    .news-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #007bff;
+        text-transform: capitalize;
+    }
+
+    .news-content h3 a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+    }
+
+    .news-content h3 a:hover {
+        color: #0056b3;
+    }
+
+    .news-content p {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    /* Thông tin thêm */
+    .news-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #999;
+        margin-top: 10px;
+    }
+
+    .news-meta span {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    /* Nút đọc tiếp */
+    .btn-read-more {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        text-transform: uppercase;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .btn-read-more:hover {
+        background-color: #218838;
+    }
+
+    /* CSS cho phân trang */
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-item a,
+.page-item span {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.page-item a:hover {
+    background-color: #e9ecef;
+}
+
+.page-item.active a,
+.page-item.active span {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+</style>
+
+<div class="news-container">
+    <h2>Tin Tức Mới Nhất</h2>
+
+    <div class="news-grid">
+        @foreach (var news in Model)
+        {
+            <div class="news-item">
+                <img src="data:image/png;base64,@news.Image" alt="@news.Title" style="max-width:100%;" />
+                <div class="news-content">
+                    <h3><a href="@Url.Action("Details", "News", new { alias = news.Alias, area = "User" })">@news.Title</a></h3>
+                    <p>@news.Description</p>
+                    <div class="news-meta">
+                        <span><i class='bx bxs-calendar'></i> @news.CreateDate.ToString("dd/MM/yyyy")</span>
+                        <span><i class="fas fa-eye"></i> 500 Lượt xem</span> <!-- Thêm thông tin lượt xem -->
+                    </div>
+                    <a href="@Url.Action("Details", "News", new { alias = news.Alias, area = "User" })" class="btn-read-more">Đọc tiếp...</a>
+                </div>
+            </div>
+        } 
+    </div>
+    <div class="row">
+        <div class="col-12 text-right">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+       {
+           DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+           DisplayLinkToLastPage = PagedListDisplayMode.Always,
+           DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+           DisplayLinkToNextPage = PagedListDisplayMode.Always,
+           DisplayLinkToIndividualPages = true,
+           MaximumPageNumbersToDisplay = 5,
+           LinkToFirstPageFormat = "«",
+           LinkToPreviousPageFormat = "‹",
+           LinkToNextPageFormat = "›",
+           LinkToLastPageFormat = "»",
+           LinkToIndividualPageFormat = "{0}",
+           UlElementClasses = new[] { "pagination" },  // Class áp dụng cho <ul>
+           LiElementClasses = new[] { "page-item" }     // Class áp dụng cho các <li>
+       })
+        </div>
+    </div>
+</div>
+

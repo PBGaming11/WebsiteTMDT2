@@ -34,7 +34,7 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class='bx bxs-heart-circle' style="color:#DD0000"></i><span style="background:#000000">1</span></a></li>
-                <li><a href="#"><i class='bx bxs-shopping-bag' style="color:#DD0000"></i><span style="background:#000000">3</span></a></li>
+                <li><a href="@Url.RouteUrl("gioHang")"><i class='bx bxs-shopping-bag'></i><span class="checkout_items" id="cartItemCount">@ViewBag.CartItemCount</span></a></li>
             </ul>
             <div class="header__cart__price">Tổng: <span>150,000 Đ</span></div>
         </div>
@@ -45,8 +45,9 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
-                <li><a asp-action="Index" asp-controller="Shop">Shop</a></li>
+                <li><a asp-area="User" asp-action="Index" asp-controller="Home">Home</a></li>
+                <li><a asp-area="User" asp-action="Index" asp-controller="Shop">Shop</a></li>
+                <li><a asp-area="User" asp-action="Index" asp-controller="News">Tin tức</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -104,14 +105,15 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a class="logo_size" asp-action="Index" asp-controller="Home"><img src="~/img/logo.png" alt=""></a>
+                        <a class="logo_size" asp-area="User" asp-action="Index" asp-controller="Home"><img src="~/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a asp-action="Index" asp-controller="Home" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")"><i class='bx bxs-home'></i> Home</a></li>
-                            <li><a asp-action="Index" asp-controller="Shop" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Shop" ? "active" : "")">Shop</a></li>
+                            <li><a asp-area="User" asp-action="Index" asp-controller="Home" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")"><i class='bx bxs-home'></i> Home</a></li>
+                            <li><a asp-area="User" asp-action="Index" asp-controller="Shop" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Shop" ? "active" : "")">Shop</a></li>
+                            <li><a href="@Url.RouteUrl("news")" class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "News" ? "active" : "")">Tin tức</a></li>
                         </ul>
                     </nav>
                 </div>

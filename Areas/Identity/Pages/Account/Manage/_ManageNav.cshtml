@@ -55,10 +55,5 @@
     <li class="nav-items"><a class="nav-links @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Trang cá nhân</a></li>
     <li class="nav-items"><a class="nav-links @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
     <li class="nav-items"><a class="nav-links @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Đổi mật khẩu</a></li>
-    @if (hasExternalLogins)
-    {
-        <li id="external-logins" class="nav-items"><a id="external-login" class="nav-links @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
-    }
-    <li class="nav-items"><a class="nav-links @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="nav-items"><a class="nav-links @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+    <li class="nav-items"><a asp-area="User" asp-controller="UserOrder" asp-action="Index" class="nav-links">Đơn hàng</a></li>
 </ul>

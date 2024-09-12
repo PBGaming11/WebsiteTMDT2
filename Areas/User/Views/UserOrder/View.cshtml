@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebsiteTMDT.Areas.Admin.Models.OrderViewCheckOut
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Mã đơn hàng</label>
+                <p class="form-control">@Model.Order.Code</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Tên khách hàng</label>
+                <p class="form-control">@Model.Order.CustomerName</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Số điên thoại</label>
+                <p class="form-control">@Model.Order.Phone</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Tiền tổng</label>
+                <p class="form-control price-displaya">@Model.Order.TotalAmount</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Ngày tạo</label>
+                <p class="form-control">@Model.Order.CreateDate.ToString("dd/MM/yyyy")</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Email</label>
+                <p class="form-control">@Model.Order.Email</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Trạng thái giao hàng</label>
+                <p class="form-control">@(Model.Order.ShippingStatus == false ? "Chưa giao hàng" : "Đã đã giao hàng")</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Danh sách sản phẩm</h2>
+            </div>
+            <div class="col-md-12">
+                @Html.Partial("_OrderDetailPartial", Model.orderDetails)
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const prices = document.querySelectorAll('.price-displaya');
+        prices.forEach(price => {
+            let priceText = price.textContent.trim();
+            let priceValue = parseInt(priceText.replace(/\D/g, '')); // Remove any non-digit characters
+
+            if (priceValue >= 1000000) {
+                // Format as x.000.000
+                let millions = Math.floor(priceValue / 1000000);
+                let thousands = Math.floor((priceValue % 1000000) / 1000);
+                price.textContent = `${millions}.${thousands.toString().padStart(3, '0')}.000 đ`;
+            } else {
+                // Format as x.000
+                let thousands = priceValue / 1000;
+                price.textContent = `${thousands.toFixed(3).replace('.', '.')} đ`;
+            }
+        });
+    });
+</script>

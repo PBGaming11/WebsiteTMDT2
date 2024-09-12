@@ -470,8 +470,8 @@ namespace WebsiteTMDT.Migrations
                     b.Property<bool>("ShippingStatus")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("int");
 
                     b.Property<int>("TypePayment")
                         .HasColumnType("int");
@@ -492,8 +492,8 @@ namespace WebsiteTMDT.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
