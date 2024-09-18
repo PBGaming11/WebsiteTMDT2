@@ -70,6 +70,9 @@ namespace WebsiteTMDT.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             public string? role { get; set; }
+            public string? Name { get; set; }
+            public string? Address { get; set; }
+            public string? profileImage { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
@@ -84,7 +87,7 @@ namespace WebsiteTMDT.Areas.Identity.Pages.Account
             }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            
+
             //nếu chưa có tài khoản admin thì mở No1 đong khung No2
             //*** Hiện tất cả role kể cả admin No1
             /*Input = new InputModel()

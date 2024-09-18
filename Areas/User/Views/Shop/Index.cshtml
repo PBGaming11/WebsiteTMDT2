@@ -114,14 +114,17 @@
                         <div class="product__pagination">
                             @if (ViewBag.CurrentPage > 1)
                             {
-                                <a href="@Url.Action("Index", new { pageNumber = ViewBag.CurrentPage - 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Previous Page"><i class='bx bx-chevron-left'></i></a>
+                                <a href="@Url.Action("Index", "Shop", new { area = "User", pageNumber = ViewBag.CurrentPage - 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Previous Page">
+                                    <i class='bx bx-chevron-left'></i>
+                                </a>
+
                             }
 
                             @for (int i = 1; i <= ViewBag.TotalPages; i++)
                             {
                                 if (i <= 5 || i >= ViewBag.TotalPages - 5 || (i >= ViewBag.CurrentPage - 2 && i <= ViewBag.CurrentPage + 2))
                                 {
-                                    <a class="@(i == ViewBag.CurrentPage ? "active" : "")" href="@Url.Action("Index", new { pageNumber = i, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })">@i</a>
+                                    <a class="@(i == ViewBag.CurrentPage ? "active" : "")" href="@Url.Action("Index","Shop", new {area = "User", pageNumber = i, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })">@i</a>
                                 }
                                 else if (i == 6 || i == ViewBag.TotalPages - 5)
                                 {
@@ -131,7 +134,7 @@
 
                             @if (ViewBag.CurrentPage < ViewBag.TotalPages)
                             {
-                                <a href="@Url.Action("Index", new { pageNumber = ViewBag.CurrentPage + 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Next Page"><i class='bx bx-chevron-right'></i></a>
+                                <a href="@Url.Action("Index","Shop", new {area = "User", pageNumber = ViewBag.CurrentPage + 1, minPrice = ViewBag.MinPrice, maxPrice = ViewBag.MaxPrice, sortOrder = ViewBag.SortOrder, searchQuery = ViewBag.SearchQuery })" aria-label="Next Page"><i class='bx bx-chevron-right'></i></a>
                             }
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebsiteTMDT.Areas.Admin.Models;
 using WebsiteTMDT.Areas.Admin.Models.EF;
 
 namespace WebsiteTMDT.Data
@@ -31,5 +32,6 @@ namespace WebsiteTMDT.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Subcribe> Subcribes { get; set; }
         public DbSet<SystemSetting> SystemSettings { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }

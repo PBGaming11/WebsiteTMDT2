@@ -67,7 +67,7 @@
             </table>
             <div class="row">
                 <div class="col-12 text-right">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    @Html.PagedListPager(Model, page => Url.Action("Index","Order", new { area = "Seller", page }))
                 </div>
             </div>
         </div>
