@@ -26,7 +26,6 @@ namespace WebsiteTMDT.Areas.User.Controllers
             int pageNumber = (page ?? 1); // Trang hiện tại, mặc định là trang 1
             // Sử dụng IPagedList để phân trang
             var pagedCart = cart.ToPagedList(pageNumber, pageSize);
-
             return View(pagedCart);
         }
 
@@ -184,6 +183,28 @@ namespace WebsiteTMDT.Areas.User.Controllers
 
             // Chuyển đến trang thanh toán
             return RedirectToAction("Index", "CheckOut");
+        }
+        [HttpPost]
+        public IActionResult ApplyVoucher(string voucherCode)
+        {
+            // Tìm voucher có mã tương ứng và chưa hết hạn, còn hiệu lực và còn số lượng
+            var voucher = _db.vouchers
+                .FirstOrDefault(v => v.Code == voucherCode
+                                     && v.StartDate <= DateTime.Now
+                                     && v.EndDate >= DateTime.Now
+                                     && v.Quantity > 0
+                                     && v.IsActive);
+
+            if (voucher == null)
+            {
+                return Json(new { success = false, message = "Voucher không hợp lệ hoặc đã hết hạn!" });
+            }
+
+            // Lưu giá trị giảm giá vào session
+            HttpContext.Session.SetString("VoucherCode", voucher.Code);
+            HttpContext.Session.SetInt32("VoucherDiscountValue", (int)voucher.DiscountValue);
+
+            return Json(new { success = true, discountValue = voucher.DiscountValue });
         }
 
     }

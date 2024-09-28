@@ -730,12 +730,12 @@ ol {
     .categories__item img {
         width: 100px;
         height: 220px;
+        border-radius: 50%;
     }
 
 .categories__slider .col-lg-3 {
     max-width: 100%;
 }
-
 .categories__slider.owl-carousel .owl-nav button {
     font-size: 18px;
     color: #1c1c1c;
@@ -2412,6 +2412,7 @@ ol {
     width: 100%;
     margin-top: 20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 /*---------------------
@@ -3358,3 +3359,283 @@ ol {
         font-size: 24px;
     }
 }
+
+
+/*css mới home*/
+
+/*banner*/
+.banner-tops {
+    width: 1200px;
+    height: 232px;
+    overflow: hidden; /* Để ẩn phần nội dung vượt ra ngoài */
+    position: relative; /* Để có thể đặt vị trí các phần tử con nếu cần */
+    margin-left: auto;
+    margin-right: auto;
+}
+.containerbanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    display: flex; /* Sử dụng flexbox để sắp xếp các phần tử bên trong */
+    height: 100%; /* Chiếm toàn bộ chiều cao của banner-top */
+}
+
+.banner-left {
+    width: 70%;
+    margin-right: 10px;
+    flex: 2; /* Tùy chỉnh tỷ lệ chiều rộng nếu cần */
+}
+
+.top-banner img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.banner-right {
+    flex: 1; /* Tùy chỉnh tỷ lệ chiều rộng nếu cần */
+    flex-direction: column; /* Sắp xếp theo chiều dọc */
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.banner-right,
+.banner-right .bottom-banner {
+    margin-bottom: 10px;
+}
+.mySlides {
+    display: none;
+}
+/* Slideshow container */
+.slideshow-container {
+    position: relative;
+    height: 100%; /* Chiếm toàn bộ chiều cao */
+    overflow: hidden; /* Ẩn phần nội dung vượt ra ngoài */
+}
+/* The dots/bullets/indicators */
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: rgba(187, 187, 187, 0.5); /* Đặt màu sắc với độ trong suốt */
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot-container {
+    position: absolute;
+    bottom: 10px; /* Cách dưới 10px */
+    left: 50%; /* Đặt ở giữa theo chiều ngang */
+    transform: translateX(-50%); /* Giúp căn giữa */
+    text-align: center;
+}
+.actives {
+    background-color: rgba(113, 113, 113, 0.7); /* Đặt màu sắc cho dot đang hoạt động với độ trong suốt */
+}
+
+/* Fading animation */
+.fades {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+
+    .prev,
+    .next,
+    .text {
+        font-size: 11px
+    }
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Modal container */
+.promo-modal {
+    display: none; /* Ẩn khi chưa load trang */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal content */
+.promo-content {
+    background-color: white;
+    padding: 20px;
+    width: 400px;
+    height: 500px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: black;
+}
+
+/* Promo image */
+.promo-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Promo text */
+.promo-text {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.promo-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #120ff1;
+}
+
+.promo-subtitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #ff4500;
+}
+
+.promo-details {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.promo-details span {
+    font-weight: bold;
+    color: #ff4500;
+}
+
+/* Promo button */
+.promo-button {
+    background-color: #ff4500;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.promo-button:hover {
+    background-color: #e43d00;
+}
+@media (max-width: 768px) {
+    .checkout-table, .checkout-table th, .checkout-table td {
+        font-size: 14px;
+    }
+}
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    .containerbanner {
+        flex-direction: column;
+    }
+
+    .banner-left, .banner-right {
+        width: 100%;
+    }
+
+    .prev, .next {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* For smaller screens (phones) */
+@media (max-width: 480px) {
+    .prev, .next {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .imageSlides {
+        border-radius: 5px;
+    }
+}
+
+Giải th

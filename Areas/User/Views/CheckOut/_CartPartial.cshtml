@@ -3,33 +3,46 @@
 @if (Model != null && Model.Any())
 {
     <table class="checkout-table">
-        @foreach (var item in Model)
-        {
-            @if (item.Issale == true)
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Giá trị giảm</th>
+                <th>Giá sau giảm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
                 <tr>
-                    <td>(Sale)</td>
-                    <td>@item.ProductName</td>
+                    @if (item.Issale)
+                    {
+                        <td>(Sale) @item.ProductName</td>
+                    }
+                    else
+                    {
+                        <td>@item.ProductName</td>
+                    }
                     <td>@item.Price.ToString("N0") Đ</td>
+                    <td>@item.DiscountValue.ToString("N0") Đ</td>
+                    <td>@((item.Price - item.DiscountValue).ToString("N0")) Đ</td>
                 </tr>
             }
-            else
-            {
-                <tr>
-                    <td>@item.ProductName</td>
-                    <td>@item.Price.ToString("N0") Đ</td>
-                </tr>
-            }
-        }
-        <tr class="total-row">
-            <td>Tổng tiền</td>
-            <td>@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</td>
-        </tr>
+        </tbody>
+        <tfoot>
+            <tr class="total-row">
+                <td colspan="4">
+                    Tổng tiền: @Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ<br />
+                    Giảm giá tổng: @Model.Sum(item => item.DiscountValue * item.Quantity).ToString("N0") Đ<br />
+                    Tổng sau giảm: @Model.Sum(item => (item.Price - item.DiscountValue) * item.Quantity).ToString("N0") Đ
+                </td>
+            </tr>
+        </tfoot>
     </table>
 }
 else
 {
     <div class="empty-cart">
-        <p>Không có sản phẩm trong giỏ hàng! Mời bạn vào trang <a asp-action="Index" asp-controller="Shop">cửa hàng</a></p>
+        <p>Không có sản phẩm trong giỏ hàng! Mời bạn vào trang <a asp-action="Index" asp-area="User" asp-controller="Shop">cửa hàng</a></p>
     </div>
 }

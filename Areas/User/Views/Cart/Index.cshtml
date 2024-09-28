@@ -70,7 +70,7 @@
                         {
                             <tr>
                                 <th>
-                                    <p>Không có sản phẩm trong giỏ hàng! Mời bạn vào trang <a asp-action="Index" asp-controller="Shop">cửa hàng</a> để mua hàng</p>
+                                    <p>Không có sản phẩm trong giỏ hàng! Mời bạn vào trang <a asp-action="Index" asp-area="User" asp-controller="Shop">cửa hàng</a> để mua hàng</p>
                                 </th>
                             </tr>
                         }
@@ -83,10 +83,19 @@
                 </div>
             </div>
             <div class="col-lg-4">
+                <div class="cart__discount">
+                    <h6>Mã quà tặng</h6>
+                    <form id="applyVoucherForm" method="post" action="/User/Cart/ApplyVoucher">
+                        <input type="text" name="voucherCode" placeholder="Mã Coupon" required>
+                        <button type="submit">Áp dụng</button>
+                    </form>
+                </div>
                 <div class="cart__total">
                     <h6>Tổng tiền giỏ hàng</h6>
                     <ul>
                         <li>Tổng tiền <span id="totalAmounts">@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</span></li>
+                        <li>Giảm giá: <span id="discountAmount">0 đ</span></li>
+                        <li>Tổng sau giảm: <span id="finalAmount">@Model.Sum(item => item.Price * item.Quantity).ToString("N0") Đ</span></li>
                     </ul>
                     </ul>
                     <a href="@Url.RouteUrl("thanhtoan")" class="primary-btn">Thanh toán</a>
@@ -96,3 +105,36 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#applyVoucherForm").submit(function (event) {
+            event.preventDefault(); // Ngăn form load lại trang
+
+            $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        alert("Voucher áp dụng thành công! Giảm giá: " + response.discountValue + "%.");
+                        // Cập nhật giảm giá và tổng tiền trên giao diện
+                        $("#discountAmount").text(response.discountValue + "%");
+
+                        // Cập nhật lại tổng tiền sau khi áp dụng giảm giá
+                        let totalAmount = parseInt($("#totalAmounts").text().replace(/\D/g, ''));
+                        let discountAmount = totalAmount * response.discountValue / 100;
+                        $("#finalAmount").text((totalAmount - discountAmount).toLocaleString() + " đ");
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra khi áp dụng voucher.");
+                }
+            });
+        });
+
+    });
+
+</script>

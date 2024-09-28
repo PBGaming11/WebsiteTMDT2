@@ -30,6 +30,8 @@ namespace WebsiteTMDT.Areas.Admin.Models.EF
         public string Email { get; set; }
         public int TotalAmount { get; set; }
         public int Quality { get; set; }
+        public string? VoucherCode { get; set; }
+        public decimal? DiscountAmount { get; set; }
         public int TypePayment { get; set; }
         public bool ShippingStatus { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

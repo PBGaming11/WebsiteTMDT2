@@ -14,7 +14,7 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="@Url.Action("Index", "Shop")" method="get">
+                        <form action="@Url.Action("Index", "Shop", new { area = "User" })" method="get">
                             <div class="hero__search__categories">
                                 Tìm kiếm
                             </div>
@@ -27,18 +27,40 @@
         </div>
     </div>
 </section>
+<div id="promoModal" class="promo-modal">
+    <div class="promo-content">
+        <span class="close-btn">&times;</span>
+        <div class="promo-image">
+            <img src="/img/vn-11134258-7r98o-lygfmvwtyvtta1_xxhdpi.jpg" alt="Promotion Image">
+        </div>
+        <div class="promo-text">
+            <div class="promo-title">93% KHÁCH HÀNG ĐỒNG Ý DA SĂN CHẮC HƠN</div>
+            <div class="promo-subtitle">60 NĂM KHOA HỌC NHÂN SÂM</div>
+            <div class="promo-details">
+                <p>QUÀ KÈM ĐẾN <span>5.000.000Đ</span> | VOUCHER ĐẾN <span>15%</span></p>
+                <p>QUÀ MỌI ĐƠN <span>1.000.000Đ</span></p>
+            </div>
+            <button class="promo-button">MUA NGAY</button>
+        </div>
+    </div>
+</div>
+
+
 <!-- Hero Section End -->
 <!-- Categories Section Begin -->
+<section class="banner-tops">
+    <vc:banner-compoment></vc:banner-compoment>
+</section>
+<section class="banner-top">
+    <div class="khung">
+        <img src="~/img/banne1.png" />
+    </div>
+</section>
 <section class="categories">
     <div class="container">
         <div class="row">
             <vc:danh-muc-home></vc:danh-muc-home>
         </div>
-    </div>
-</section>
-<section class="banner-top">
-    <div class="khung">
-        <img src="~/img/banne1.png" />
     </div>
 </section>
 <!-- Categories Section End -->
@@ -299,4 +321,85 @@
             }
         });
     });
+    var timeOut = 2000;
+    var slideIndex = 0;
+    var autoOn = true;
+
+    autoSlides();
+
+    function autoSlides() {
+        timeOut = timeOut - 20;
+
+        if (autoOn == true && timeOut < 0) {
+            showSlides();
+        }
+        setTimeout(autoSlides, 20);
+    }
+
+    function prevSlide() {
+
+        timeOut = 2000;
+
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            dots[i].className = dots[i].className.replace(" actives", "");
+        }
+        slideIndex--;
+
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        if (slideIndex == 0) {
+            slideIndex = 3
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+
+    function showSlides() {
+
+        timeOut = 2000;
+
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            dots[i].className = dots[i].className.replace(" actives", "");
+        }
+        slideIndex++;
+
+        if (slideIndex > slides.length) {
+            slideIndex = 1
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " actives";
+    }
+
+    // Hiển thị modal khi trang load
+    window.onload = function () {
+        const modal = document.getElementById("promoModal");
+        const closeBtn = document.querySelector(".close-btn");
+
+        // Hiển thị modal
+        modal.style.display = "flex";
+
+        // Đóng modal khi nhấn nút đóng
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // Đóng modal khi click bên ngoài modal
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    };
+
 </script>
+
+

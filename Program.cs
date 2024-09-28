@@ -94,6 +94,10 @@ app.UseEndpoints(endpoints =>
        name: "news",
        pattern: "tin-tuc",
        defaults: new { area = "User", controller = "News", action = "Index" });
+    endpoints.MapControllerRoute(
+       name: "OrderConfirmation",
+       pattern: "xac-nhan-thanh-toan",
+       defaults: new { area = "User", controller = "CheckOut", action = "OrderConfirmation" });
 
     endpoints.MapRazorPages();
 });

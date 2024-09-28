@@ -17,6 +17,8 @@
             <th>Tên khách hàng</th>
             <th>SĐT</th>
             <th>Tổng tiền</th>
+            <th>Tổng tiền</th>
+            <th>Mã Voucher</th>
             <th>Ngày tạo</th>
             <th>Trạng thái</th>
             <th></th>
@@ -34,6 +36,16 @@
                     <td>@item.CustomerName</td>
                     <td>@item.Phone</td>
                     <td class="price-displaya">@item.TotalAmount</td>
+                        @if (item.VoucherCode == null)
+                        {
+                            <td>Không có voucher</td>
+                            <td>0 Đ</td>
+                        }
+                        else
+                        {
+                            <td>@item.VoucherCode</td>
+                            <td>@string.Format("{0:N0}", item.DiscountAmount) đ</td>
+                        }
                     <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
                     <td>@(item.ShippingStatus == false ? "Chưa giao hàng" : "Đã đã giao hàng")</td>
                     <td>

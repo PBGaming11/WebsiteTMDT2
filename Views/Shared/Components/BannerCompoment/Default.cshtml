@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebsiteTMDT.Areas.Admin.Models.EF.Banner>
+@* <div class="slideshowContainer col-sm-8">
+    @foreach (var item in Model)
+    {
+        if (item.IsActive)
+        {
+            <img class="imageSlides" src="data:image/png;base64,@item.Image" alt="Banner Image">
+        }
+    }
+    
+    <span id="leftArrow" class="slideshowArrow">&#8249;</span>
+    <span id="rightArrow" class="slideshowArrow">&#8250;</span>
+
+    <div class="slideshowCircles">
+        <!-- Filled 'dot' class is set to first image in slideshow, and then via Javascript the filled 'dot' class follows the current image.
+        Make sure you match the number of these 'circle' span elements to the number of images in your slideshow. -->
+        
+        @foreach (var item in Model)
+        {
+            if (item.IsActive)
+            {
+                <span class="circle"></span>
+            }
+        }
+        
+    </div>
+
+</div>
+
+<div class="col-sm-4 bannersalesmall">
+    @foreach (var item in Model)
+    {
+        if (item.IsSingle)
+        {
+            <a href="#">
+                <div style="margin-bottom: 5px;" class="imgsale">
+                    <img src="data:image/png;base64,@item.Image" alt="Banner Image">
+                </div>
+            </a>
+        }
+    }
+</div> *@
+<div class="containerbanner">
+    <div class="banner-left">
+        <div class="slideshow-container">
+            @foreach (var item in Model)
+            {
+                if (item.IsActive)
+                {
+                    <div class="mySlides fades"><a href="#">
+                        <img class="imageSlides" src="data:image/png;base64,@item.Image" alt="Banner Image">
+                        </a>
+                    </div>
+                }
+            }    
+            <div class="dot-container">
+                @foreach (var item in Model)
+                {
+                    if (item.IsActive)
+                    {
+                        <span class="dot"></span>
+                    }
+                }
+            </div>
+            <a class="prev" onclick="prevSlide()">&#10094;</a>
+            <a class="next" onclick="showSlides()">&#10095;</a>
+        </div>
+    </div>
+    <div class="banner-right">
+        @foreach (var item in Model)
+        {
+            if (item.IsSingle)
+            {
+                <a href="#">
+                    <div class="top-banner">
+                        <img src="data:image/png;base64,@item.Image" alt="Banner Image">
+                    </div>
+                </a>
+            }
+        }
+    </div>
+</div>
+

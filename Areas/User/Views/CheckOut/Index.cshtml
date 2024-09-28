@@ -5,162 +5,146 @@
 @using System.Web.Mvc.Ajax
 @model WebsiteTMDT.Models.CheckoutViewModel
 <style>
-    /* Title Styles */
-    .checktitle {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #007bff;
-        margin-bottom: 10px;
-    }
+    /* Container styles */
+.containers {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
 
-    .checktitle2 {
-        font-size: 1.75rem;
-        font-weight: bold;
-        color: #28a745;
-        margin-top: 20px;
-        margin-bottom: 15px;
-    }
+/* Title styling */
+.checktitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
 
-    /* Information Paragraph */
-    .checkoutinfo {
-        font-size: 1.2rem;
-        color: #6c757d;
-        margin-bottom: 20px;
-    }
+.checkoutinfo {
+    font-size: 18px;
+    color: #666;
+}
 
-    /* Horizontal Rule */
-    hr {
-        border: 1px solid #007bff;
-        margin: 20px 0;
-    }
+/* Form section styling */
+.checkoutform {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+}
 
-    /* Center Alignment */
-    .text-center {
-        text-align: center;
-    }
-    /*////////////////*/
-    .checkoutform {
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
 
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
 
-    .checkoutlable label {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        display: block;
-        color: #333;
-    }
+.form-control {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+}
 
-    .form-control {
-        width: 100%;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 0;
-        padding-left: 5px;
-        margin: 0;
-        font-size: 1rem;
-        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        margin-bottom: 1.5rem;
-    }
+.checkoutlable input, .checkoutlable select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
 
-        .form-control:focus {
-            border-color: #0056b3;
-            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
-            outline: 0;
-        }
+.text-danger {
+    font-size: 14px;
+    color: #e74c3c;
+}
 
-    .btn {
-        padding: 0.5rem 1rem; /* Smaller padding */
-        font-size: 0.875rem; /* Smaller font size */
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    }
+/* Button styling */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    color: #fff;
+}
 
-    /* Button color and hover effects */
-    .btn-success {
-        background-color: #28a745;
-        border-color: #28a745;
-        color: #fff;
-    }
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
 
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
+/* Checkout product section */
+.checkoutproduct {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 50px;
+}
 
-    /* Optional: Center the button */
-    .btn-block {
-        width: 250px;
-        display: flex;
-        justify-content: center;
-        margin-top: 2rem; /* Adjust spacing above the button */
-    }
-    /*////////////////*/
-    .checkoutproduct {
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-left: 50px;
-    }
+.checktitle3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
 
-    .checktitle3 {
-        font-size: 18px;
-        color: #333;
-        margin-bottom: 10px;
-    }
+/* Bảng giỏ hàng */
+.checkout-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
 
-    .checktitle4 {
-        font-size: 22px;
-        color: #007bff;
-        margin-bottom: 20px;
-    }
+.checkout-table th, .checkout-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
 
-    .checkout-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
+.checkout-table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    color: #555;
+}
 
-        .checkout-table td {
-            padding: 8px 12px;
-            border-bottom: 1px solid #ddd;
-            font-size: 16px;
-            color: #555;
-        }
+.checkout-table td {
+    background-color: #fff;
+}
 
-        .checkout-table .total-row {
-            font-weight: bold;
-            background-color: #f1f1f1;
-        }
+.checkout-table td:first-child {
+    text-align: left;
+}
 
-    .empty-cart {
-        text-align: center;
-        padding: 20px;
-        font-size: 16px;
-        color: #666;
-    }
+.checkout-table .total-row td {
+    text-align: right;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 15px;
+    background-color: #f1f1f1;
+    border-top: 2px solid #ddd;
+    line-height: 1.6;
+}
 
-        .empty-cart a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-            .empty-cart a:hover {
-                text-decoration: underline;
-            }
+.checkout-table .total-row td br {
+    margin-bottom: 10px;
+}
 
 </style>
 <section class="shopping-cart spad">
-    <div style="margin-bottom: 40px;" class="container">
+    <div style="margin-bottom: 40px;" class="containers">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 class="checktitle">Thanh toán</h1>
@@ -169,9 +153,10 @@
         </div>
         <hr />
         <h3 class="checktitle2">Thông tin khách hàng</h3>
+        <br>
         <div class="row">
-            <div class="col-lg-8 checkoutform">
-                <form asp-controller="CheckOut" asp-action="ProcessOrder" method="post">
+            <div class="col-lg-7 checkoutform">
+                <form asp-area="User" asp-controller="CheckOut" asp-action="ProcessOrder" method="post">
                     <div class="form-group checkoutlable">
                         <label>Họ tên khách hàng</label>
                         <input asp-for="Order.CustomerName" class="form-control" autocomplete="off" />
@@ -206,7 +191,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 checkoutproduct">
+            <div class="col-lg-4 checkoutproduct">
                 <h4 class="checktitle3">Giỏ hàng</h4>
                 @Html.Partial("_CartPartial", Model.CartItems)
             </div>

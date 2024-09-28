@@ -8,6 +8,7 @@
         public int Quantity { get; set; }
         public string ImageUrl { get; set; } // URL của hình ảnh sản phẩm
         public bool Issale { get; set; }
+        public decimal DiscountValue { get; set; }  // Giá trị giảm
     }
 
 }

@@ -32,6 +32,18 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
+                <label>Mã Voucher</label>
+                <p class="form-control price-displaya">@Model.Order.VoucherCode</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Giá voucher giảm</label>
+                <p class="form-control price-displaya">@Model.Order.DiscountAmount</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
                 <label>Ngày tạo</label>
                 <p class="form-control">@Model.Order.CreateDate.ToString("dd/MM/yyyy")</p>
             </div>
