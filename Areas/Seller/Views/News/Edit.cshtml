@@ -52,7 +52,7 @@
         </div>
         <div class="card-body">
             <div class="bs-stepper-content">
-                @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { }))
+                @using (Html.BeginForm("Edit", "News", new { area = "Seller" }, FormMethod.Post, false, new { }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group">
                             <label for="Description">Chi tiết</label>
-                            @Html.TextBoxFor(x => x.Detail, new { @class = "form-control", @id = "txtDetail" })
+                            @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @id = "txtDetail" })
                         </div>
                         <div class="form-group">
                             <label for="SeoDescription">Hiển thị</label>
@@ -104,7 +104,7 @@
                             <label for="SeoKeywords">Seo Keywords</label>
                             @Html.TextBoxFor(x => x.SeoKeywords, new { @class = "form-control" })
                         </div>
-                        <a href="/Admin/News" class="btn btn-danger">Quay lại</a>
+                        <a href="/Seller/News" class="btn btn-danger">Quay lại</a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 }
